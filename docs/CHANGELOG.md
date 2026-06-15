@@ -4,6 +4,27 @@ All notable pipeline increments, accuracy measurements, inference speed benchmar
 
 Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) with additional columns for metrics tracking.
 
+## [v0.6.0] — 2026-06-15
+
+### 🏗️ Added
+- Created `scripts/validate_submission.py` to validate prediction file format, encoding, column correctness, unique IDs, and valid answer choices.
+- Created `scripts/eval_accuracy.py` to calculate overall and category-specific accuracy, confusion matrices, and export a detailed error log.
+- Created `scripts/profile_performance.py` to trace and profile per-question latency, estimated token count, and fallback rate.
+- Created `scripts/run_full_validation.py` to serve as the main orchestration harness executing the entire validation suite.
+- Generated `docs/error_analysis.md` and `docs/performance_profile.json` reporting evaluation results on a subset test configuration.
+- Added baseline report `docs/baseline_accuracy.md` recording initial suite metrics.
+
+### 📊 Metrics
+| Metric | Value | Delta vs. Previous | Notes |
+|---|---|---|---|
+| Overall Accuracy | 26.00% | Base | Evaluated on gold subset (50 questions) |
+| Avg Latency / Question | 64.51 ms | — | Simulated profiling execution |
+| Fallback Rate | 0.00% | — | No fallback default triggers detected |
+
+### 📝 Notes
+- Phase 5 Local Evaluation & Validation Suite completed.
+- Harness validated successfully on the local test framework.
+
 ## [v0.5.0] — 2026-06-15
 
 ### 🏗️ Added
