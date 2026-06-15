@@ -1,25 +1,21 @@
+# -*- coding: utf-8 -*-
+"""
+Main prompt builder module that interfaces with prompt templates and the router.
+"""
 from typing import List
+from src.utils.prompt_templates import build_prompt_by_mode
+from src.utils.prompt_router import build_routed_prompt
 
-def build_prompt(question: str, choices: List[str]) -> str:
+def build_prompt(question: str, choices: List[str], mode: str = "zero_shot") -> str:
     """
-    Generates a zero-shot Vietnamese MCQ prompt for the given question and choices.
-    Conforms to AGENTS.md requirements and maps choices dynamically to labels (A, B, C, D, ...).
+    Generates MCQ prompts dynamically based on prompt mode:
+    - 'zero_shot' (baseline)
+    - 'few_shot'
+    - 'cot' (chain of thought)
+    - 'routed' (heuristic router)
+    - 'mixed_lang' (Vietnamese + English)
     """
-    # Build options list
-    options_text = []
-    for i, choice in enumerate(choices):
-        label = chr(65 + i)  # 65 is ASCII for 'A'
-        options_text.append(f"{label}. {choice}")
-    
-    options_formatted = "\n".join(options_text)
-    
-    prompt = (
-        "Bạn là trợ lý AI. Hãy chọn đáp án đúng nhất cho câu hỏi sau. "
-        "Chỉ trả lời bằng MỘT chữ cái duy nhất (ví dụ: A, B, C, D) đại diện cho đáp án đúng. "
-        "Không giải thích, không viết thêm bất kỳ từ nào khác ngoài chữ cái đáp án.\n\n"
-        f"Câu hỏi: {question}\n\n"
-        "Các lựa chọn:\n"
-        f"{options_formatted}\n\n"
-        "Đáp án:"
-    )
-    return prompt
+    if mode == "routed":
+        return build_routed_prompt(question, choices)
+    else:
+        return build_prompt_by_mode(question, choices, mode=mode)

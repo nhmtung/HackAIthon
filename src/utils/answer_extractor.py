@@ -1,17 +1,20 @@
 # -*- coding: utf-8 -*-
 """
-Answer Extractor — 4-tier regex extraction chain.
+Answer Extractor — 5-tier regex extraction chain (CoT-enhanced).
 
-Conforms to AGENTS.md §2.3:
-  Tier 1: Single valid character
-  Tier 2: Regex match against known Vietnamese/English answer patterns
-  Tier 3: First valid uppercase letter in raw output
-  Tier 4: Absolute fallback → 'A'
+Conforms to AGENTS.md §2.3 with Phase 3 CoT extensions:
+  Tier 1: Single valid character (model returned just a letter)
+  Tier 2: Last "Đáp án: X" pattern (for CoT output — answer at end)
+  Tier 3: Regex match against known Vietnamese/English answer patterns
+  Tier 4: First valid uppercase letter in raw output
+  Tier 5: Absolute fallback → 'A'
 
 NEVER returns empty string. NEVER returns invalid letter. NEVER raises exceptions.
 """
 import re
 from typing import Optional
+
+__all__ = ["extract_answer"]
 
 # Precompiled regex — matches answer indicators in Vietnamese and English
 _ANSWER_RE = re.compile(
@@ -21,10 +24,25 @@ _ANSWER_RE = re.compile(
     re.IGNORECASE
 )
 
+# CoT-specific: match the LAST occurrence of "Đáp án: X" in reasoning output
+_COT_FINAL_ANSWER_RE = re.compile(
+    r'(?:Đáp\s*án|Answer|Kết\s*luận|Vậy\s*đáp\s*án)\s*[:：]?\s*\**\s*([A-J])\b',
+    re.IGNORECASE
+)
+
+# Match a standalone letter at the very end of the output
+_TRAILING_LETTER_RE = re.compile(
+    r'[\s\n:：\.\)]*([A-J])\s*[\.\)]*\s*$',
+    re.IGNORECASE
+)
+
 
 def extract_answer(raw: str, num_choices: int = 4) -> str:
     """
-    4-tier extraction: single-char → regex → first-valid-letter → fallback 'A'.
+    5-tier extraction: single-char → CoT-final-answer → regex → first-valid-letter → fallback 'A'.
+
+    Enhanced for Phase 3 CoT prompts where the model produces reasoning text
+    followed by a final answer line like "Đáp án: B".
 
     Args:
         raw: Raw model output string. Handles None and empty string gracefully.
@@ -52,16 +70,33 @@ def extract_answer(raw: str, num_choices: int = 4) -> str:
     if len(s) == 1 and s.upper() in valid:
         return s.upper()
 
-    # Tier 2: Regex match against known answer patterns
+    # Tier 2: CoT-aware — find the LAST "Đáp án: X" pattern (answer after reasoning)
+    # This is critical for CoT mode where reasoning comes first, answer at end
+    cot_matches = list(_COT_FINAL_ANSWER_RE.finditer(raw))
+    if cot_matches:
+        # Take the LAST match (the final answer after reasoning)
+        last_match = cot_matches[-1]
+        letter = last_match.group(1).upper()
+        if letter in valid:
+            return letter
+
+    # Tier 2b: Check for a trailing standalone letter at the end of output
+    trailing_match = _TRAILING_LETTER_RE.search(raw)
+    if trailing_match:
+        letter = trailing_match.group(1).upper()
+        if letter in valid:
+            return letter
+
+    # Tier 3: Regex match against known answer patterns (first occurrence)
     for m in _ANSWER_RE.finditer(raw):
         letter = (m.group(1) or m.group(2) or "").upper()
         if letter in valid:
             return letter
 
-    # Tier 3: First valid uppercase letter in the output
+    # Tier 4: First valid uppercase letter in the output
     for ch in raw:
         if ch.upper() in valid:
             return ch.upper()
 
-    # Tier 4: Absolute fallback — never return empty
+    # Tier 5: Absolute fallback — never return empty
     return "A"

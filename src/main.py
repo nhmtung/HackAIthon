@@ -4,9 +4,9 @@ Multi-Task AI Agent Entrypoint (Track C - INNOVATOR)
 
 End-to-end pipeline:
   1. Detect and load input questions (JSON or CSV).
-  2. Build zero-shot Vietnamese MCQ prompts.
+  2. Build dynamic prompts according to the specified prompt_mode.
   3. Run batched inference via vLLM (or HuggingFace fallback).
-  4. Extract single-letter answers with 4-tier regex chain.
+  4. Extract single-letter answers with 5-tier regex chain.
   5. Write validated pred.csv to output directory.
 
 Conforms to AGENTS.md §2, §3, §5.
@@ -108,6 +108,13 @@ def main() -> None:
     parser.add_argument("--model", type=str, default="Qwen/Qwen3.5-7B", help="Model name or path")
     parser.add_argument("--max-tokens", type=int, default=16, help="Max tokens for generation")
     parser.add_argument("--dry-run", action="store_true", help="Skip inference, output all 'A'")
+    parser.add_argument(
+        "--prompt_mode",
+        type=str,
+        default="zero_shot",
+        choices=["zero_shot", "few_shot", "cot", "routed", "mixed_lang"],
+        help="Prompt template style/routing strategy to use"
+    )
     args = parser.parse_args()
 
     # ── Resolve paths ─────────────────────────────────────────────────────
@@ -127,6 +134,7 @@ def main() -> None:
     logger.info(f"[Pipeline] Output: {output_path}")
     logger.info(f"[Pipeline] Model:  {args.model}")
     logger.info(f"[Pipeline] Dry run: {args.dry_run}")
+    logger.info(f"[Pipeline] Prompt Mode: {args.prompt_mode}")
 
     # ── Step 1: Load questions ────────────────────────────────────────────
     questions = load_questions(input_path)
@@ -140,7 +148,7 @@ def main() -> None:
     prompts: list[str] = []
     for q in questions:
         try:
-            prompt = build_prompt(q["question"], q["choices"])
+            prompt = build_prompt(q["question"], q["choices"], mode=args.prompt_mode)
             prompts.append(prompt)
         except Exception as e:
             logger.error(f"[Pipeline] Failed to build prompt for qid={q.get('qid')}: {e}")
@@ -151,12 +159,19 @@ def main() -> None:
     # ── Step 3: Run inference ─────────────────────────────────────────────
     start_time = time.time()
 
+    # Automatically set larger max_tokens if CoT is used
+    max_tokens = args.max_tokens
+    if args.prompt_mode in ["cot", "routed"] and max_tokens == 16:
+        # Step up token limits for CoT reasoning
+        max_tokens = 512
+        logger.info(f"[Pipeline] Stepping up max_tokens to {max_tokens} for reasoning mode.")
+
     if args.dry_run:
         logger.info("[Pipeline] DRY RUN — skipping model inference, all answers default to 'A'.")
         raw_outputs = ["A"] * len(prompts)
     else:
         logger.info("[Pipeline] Initializing inference engine...")
-        engine = VLLMEngine(model_name=args.model, max_tokens=args.max_tokens)
+        engine = VLLMEngine(model_name=args.model, max_tokens=max_tokens)
         logger.info(f"[Pipeline] Backend: {engine.backend}")
         logger.info(f"[Pipeline] Running inference on {len(prompts)} prompts...")
         raw_outputs = engine.generate(prompts)
