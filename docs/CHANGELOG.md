@@ -4,6 +4,29 @@ All notable pipeline increments, accuracy measurements, inference speed benchmar
 
 Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) with additional columns for metrics tracking.
 
+## [v0.2.0] — 2026-06-15
+
+### 🏗️ Added
+- Defensive data loader in `src/utils/data_loader.py` supporting robust JSON/CSV parsing with error isolation.
+- Exploratory script `scripts/test_data_loader.py` analyzing dataset metrics, choice distributions, and question classifications.
+- Dataset statistics report in `docs/dataset_stats.md`.
+
+### 📊 Metrics
+| Metric | Value | Delta vs. Previous | Notes |
+|---|---|---|---|
+| Accuracy (Public Test) | — | — | Not yet measured |
+| Inference Speed (Req/s) | — | — | Not yet measured |
+| Total Questions (Public Test) | 463 | +463 | Loaded successfully from `data/public-test_1780368312.json` |
+| Max Question Length | 8712 chars | +8712 | Maximum length of question text |
+| Question Breakdown | 100 RAG, 123 Math, 240 Factual | — | RAG: 21.60%, Math: 26.57%, Factual: 51.84% |
+
+### 📝 Notes
+- Phase 1 Data Ingestion & Exploration completed.
+- Identified that 28.94% of questions have 10 choices, which will require a dynamic options builder mapped up to letters 'K'.
+- Confirmed maximum length is 8,712 characters, suggesting a vLLM context window limit setup of at least 4,096 tokens.
+
+---
+
 ## [v0.1.0] — 2026-06-15
 
 ### 🏗️ Added
