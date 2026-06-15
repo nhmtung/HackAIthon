@@ -1,5 +1,6 @@
 # Use NVIDIA CUDA runtime as base (compatible with vLLM)
-FROM nvidia/cuda:12.1-runtime-ubuntu22.04
+FROM nvidia/cuda:12.1.0-runtime-ubuntu22.04
+
 
 # Set working directory
 WORKDIR /app
