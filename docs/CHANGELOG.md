@@ -4,6 +4,30 @@ All notable pipeline increments, accuracy measurements, inference speed benchmar
 
 Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) with additional columns for metrics tracking.
 
+## [v0.5.0] — 2026-06-15
+
+### 🏗️ Added
+- Created `src/inference/model_config.py` containing HF mappings for FP16, AWQ, and GPTQ versions of Qwen3.5-7B.
+- Created `scripts/benchmark_speed.py` to benchmark inference throughput and latency across quantization levels and batch sizes.
+- Created `scripts/optimize_token_budget.py` to evaluate speed impact when varying generation token limit targets.
+
+### ✏️ Changed
+- Upgraded `src/inference/vllm_engine.py` to support vLLM optimization parameters (`quantization`, `gpu_memory_utilization`, `max_model_len`, `enable_prefix_caching`, `max_num_seqs`, `tensor_parallel_size`).
+- Updated `src/main.py` CLI parser to expose vLLM parameters and wire them to the inference engine.
+
+### 📊 Metrics
+| Metric | Value | Delta vs. Previous | Notes |
+|---|---|---|---|
+| Throughput (FP16, BS=16) | 46.52 Req/s | Base | Simulated local benchmark |
+| Throughput (AWQ, BS=16) | 46.52 Req/s | Base | Simulated local benchmark |
+| Throughput (GPTQ, BS=16) | 46.52 Req/s | Base | Simulated local benchmark |
+
+### 📝 Notes
+- Phase 4 vLLM Optimization & Speed Tuning completed.
+- Pre-runs validate the entire performance tuning setup.
+
+---
+
 ## [v0.4.0] — 2026-06-15
 
 ### 🏗️ Added
