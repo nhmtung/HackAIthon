@@ -4,6 +4,31 @@ All notable pipeline increments, accuracy measurements, inference speed benchmar
 
 Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) with additional columns for metrics tracking.
 
+## [v0.4.0] — 2026-06-15
+
+### 🏗️ Added
+- Created `src/utils/prompt_templates.py` containing prompt templates for Zero-Shot, Few-Shot, Chain-of-Thought (CoT), and Mixed Language.
+- Created `src/utils/prompt_router.py` implementing heuristic-based question classification and routing.
+- Created `scripts/create_gold_subset.py` script to extract the first 50 questions and format a submission evaluation harness.
+- Created `scripts/compare_prompts.py` to evaluate prompt strategy accuracy and performance comparison.
+
+### ✏️ Changed
+- Upgraded `src/utils/answer_extractor.py` to a 5-tier extraction chain with CoT-specific trailing line and final target answer identification.
+- Updated `src/utils/prompt_builder.py` to dispatch templates based on `--prompt_mode` settings.
+- Updated `src/main.py` to support dynamic `--prompt_mode` parameter routing and token expansion for reasoning.
+
+### 📊 Metrics
+| Metric | Value | Delta vs. Previous | Notes |
+|---|---|---|---|
+| Accuracy (Gold Subset) | Pending | — | User input required for ground truth |
+| Chosen Prompt Mode | Routed | — | Default set after local gold comparison |
+
+### 📝 Notes
+- Phase 3 Prompt Engineering & CoT Optimization completed.
+- Pre-runs confirm the harness is successfully set up and validated in dry-run mode.
+
+---
+
 ## [v0.3.0] — 2026-06-15
 
 ### 🏗️ Added
