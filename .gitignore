@@ -1,0 +1,84 @@
+# Byte-compiled / optimized / DLL support
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Environments and Virtual Wrappers
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Testing and Coverage
+.pytest_cache/
+.tox/
+.nosenv/
+.coverage
+.coverage.*
+.cache
+htmlcov/
+nosetests.xml
+coverage.xml
+*.cover
+*.log
+
+# IDE and Editor configurations
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.swp
+.DS_Store
+Thumbs.db
+
+# Data & Original Contest Benchmarks Isolation
+/data/
+/output/
+*.csv
+*.json
+*.pickle
+*.xlsx
+*.parquet
+
+# Machine Learning & Large Model Weight Isolation
+models/
+checkpoints/
+.huggingface/
+huggingface_cache/
+*.bin
+*.safetensors
+*.gguf
+*.ggml
+*.pt
+*.pth
+*.h5
+*.onnx
+*.weights

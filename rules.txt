@@ -1,0 +1,435 @@
+THỂ LỆ 
+Cuộc thi “Vietnamese Student HackAIthon” năm 2026 
+--------- 
+I. ĐỐI TƯỢNG DỰ THI  
+- Học sinh đang học tập tại các trường trung học phổ thông, trung tâm giáo 
+dục nghề nghiệp - giáo dục thường xuyên trên cả nước. 
+- Sinh viên hệ chính quy hiện đang học tập tại các đại học, học viện, trường 
+đại học, cao đẳng trên toàn quốc, sinh viên Việt Nam tại nước ngoài.  
+Thí sinh có thể đăng ký thi theo hình thức cá nhân hoặc theo đội, tối đa 05 
+thành viên mỗi đội (đã bao gồm người hướng dẫn (nếu có), không giới hạn độ 
+tuổi người hướng dẫn). 
+II. NỘI DUNG  
+A.  BẢNG A - EXPLORER 
+Cá nhân dự thi sẽ lựa chọn một tình huống hoặc vấn đề thực tiễn của bản 
+thân (trong học tập, sinh hoạt, công tác Đoàn - Hội...) và trình bày cách ứng dụng 
+các công cụ AI (như ChatGPT, Gemini, Copilot...) để giải quyết. Bài dự thi được 
+nộp trực tuyến dưới dạng một báo cáo ngắn (tối đa 500 từ), yêu cầu thể hiện rõ tư 
+duy đặt câu lệnh (prompt), có dấu ấn cá nhân hóa và làm nổi bật được hiệu quả 
+thực tế mang lại. 
+(Cá nhân dự thi là học sinh các trường trung học phổ thông, trung tâm giáo 
+dục nghề nghiệp - giáo dục thường xuyên trên cả nước; sinh viên hệ chính quy 
+hiện đang học tập tại các đại học, học viện, trường đại học, cao đẳng trên toàn 
+quốc, sinh viên Việt Nam tại nước ngoài. Mỗi cá nhân tham gia có thể gửi nhiều 
+bài dự thi). 
+B. BẢNG B - CHALLENGER 
+Mỗi đội thi phát triển một AI dùng hệ sinh thái sẵn có của Ban Tổ chức. Các đội 
+sẽ xây dựng một giải pháp AI ở cấp độ MVP (Minimum Viable Product - Sản phẩm 
+khả thi tối thiểu), dựa trên ý tưởng do chính đội đề xuất và ứng dụng bộ API đa lĩnh 
+vực được Ban tổ chức cung cấp. Ý tưởng cần hướng tới giải quyết các bài toán thực 
+tiễn thuộc những lĩnh vực trọng điểm, theo một trong những đề tài dưới đây: 
+1. Phát triển giải pháp AI phục vụ đổi mới giáo dục/ cá nhân hóa học tập, 
+hỗ trợ giáo viên/ nâng cao hiệu quả quản lý của nhà trường. 
+ 2. Ứng dụng AI để xây dựng, phát triển nội dung số/ nâng cao tương tác người 
+xem/ cải thiện hiệu quả vận hành của cơ quan truyền thông, báo chí, truyền hình. 
+ 3. Ứng dụng AI để tạo ra 1 sản phẩm dịch vụ ngân hàng mới. 
+- Bối cảnh: Ngành tài chính - ngân hàng đang bước vào giai đoạn chuyển 
+đổi số toàn diện, nơi các sản phẩm dịch vụ truyền thống dần bị bão hòa và cạnh 
+tranh gay gắt về giá hay tính năng cơ bản. Khách hàng thế hệ mới (Digital Natives) 
+không chỉ đòi hỏi sự nhanh chóng mà còn yêu cầu tính cá nhân hóa cao độ và trải 
+nghiệm liền mạch trên mọi điểm chạm số. Việc ứng dụng AI không còn là m ột 
+lựa chọn công nghệ, mà đã trở thành chìa khóa cốt lõi để tái cấu trúc, tạo ra những 
+sản phẩm dịch vụ ngân hàng thế hệ mới mang tính "dự báo" và "thấu hiểu" (đặc 
+biệt để thu hút tệp khách hàng trẻ, thế hệ luôn tìm kiếm các trải nghiệm mang tính 
+cá nhân hoá, trực quan và truyền cảm hứng). 
+ 4. Xây dựng giải pháp AI hỗ trợ công tác khám chữa bệnh/ tối ưu vận hành 
+cơ sở y tế/ nâng cao trải nghiệm người bệnh. 
+5. Phát triển giải pháp AI hỗ trợ đổi mới, nâng cao hiệu quả công tác Hội 
+và phong trào sinh viên, tối ưu hóa quy trình quản lý, đánh giá, xét chọn danh hiệu 
+“Sinh viên 5 tốt cấp Trung ương” 
+- Bối cảnh: Phong trào “Sinh viên 5 tốt” là hoạt động chủ đạo nhằm xây 
+dựng thế hệ sinh viên toàn diện. H àng năm có một số lượng rất lớn hồ sơ “Sinh 
+viên 5 tốt”, “Tập thể sinh viên 5 tốt” gửi về cấp Trung ương, đòi hỏi rất nhiều thời 
+gian và công sức để thu thập, phân lo ại, đối chiếu các minh ch ứng khác nhau. 
+Nắm bắt định hướng ứng dụng chuyển đổi số vào triển khai phong tr ào, rất cần 
+xây dựng một trợ lý ảo tích hợp vừa hỗ trợ sinh viên giải đáp thắc mắc, khó khăn 
+trong quá trình phấn đấu, rèn luyện vừa hỗ trợ quy trình xét chọn danh hiệu để tối 
+ưu hóa thời gian và hiệu suất làm việc. 
+6. Phát triển giải pháp AI giúp cơ quan nhà nước nâng cao năng suất xử lý 
+hồ sơ, tăng tính minh bạch, cải thiện dịch vụ và sự hài lòng của người dân, hướng 
+tới hiệu quả quản trị điều hành.  
+- Bối cảnh: Hiện nay, Nhà nước đang đẩy mạnh cung cấp dịch vụ công trực 
+tuyến. Tuy nhiên vẫn gặp phải một số khó khăn do nhiều quy trình hiện nay chưa 
+thực sự số hóa 100% quy trình. Bên cạnh đó, ngôn ngữ hành chính thường phức 
+tạp, giao diện chưa thân thiện khiến người dân (đặc biệt là người lớn tuổi, ngư ời 
+khuyết tật,...) gặp khó khăn khi tiếp cận. Đồng thời, các cán bộ tại bộ phận một 
+cửa vẫn chịu áp lực lớn khi phải kiểm tra hồ sơ thủ công, trong khi các công cụ 
+hỗ trợ hiện tại (như chatbot h ỏi đáp) ở nhiều địa phương vẫn còn h ạn chế. Từ 
+những thực tế trên, cấp thiết cần các giải pháp AI hỗ trợ giao tiếp hoàn toàn bằng 
+giọng nói, hỗ trợ khai thông tin, nộp giấy tờ bản mềm, đánh giá mức độ hài lòng 
+của người dân thông qua camera tích hợp AI tại điểm thực hiện,... 
+C. BẢNG C - INNOVATOR 
+Cá nhân/đội thi tập trung vào việc sử dụng các mô hình ngôn ngữ lớn để thiết 
+kế AI Agent xử lý đa tác vụ.  
+III. ĐĂNG KÝ THAM GIA  
+A. BẢNG A - EXPLORER 
+ 1. Nhiệm vụ:   
+ Cá nhân dự thi sẽ lựa chọn một tình huống hoặc vấn đề thực tiễn của bản 
+thân (trong học tập, sinh hoạt, công tác Đoàn - Hội...) và trình bày cách ứng dụng 
+các công cụ AI (như ChatGPT, Gemini, Copilot...) để giải quyết. Bài dự thi được 
+nộp trực tuyến dưới dạng một báo cáo ngắn (tối đa 500 từ), yêu cầu thể hiện rõ tư 
+duy đặt câu lệnh (prompt), có dấu ấn cá nhân hóa và làm nổi bật được hiệu quả 
+thực tế mang lại. 
+ Thời gian dự thi: Từ ngày 02/6 - 03/7/2026. 
+ 2. Yêu cầu đầu ra:  
+ Thí sinh nộp bài dự thi trực tuyến qua website: hackaithon.vsds.vn. Một bài 
+dự thi hợp lệ bắt buộc phải đạt những yêu cầu sau: 
+ Bản báo cáo (trình bày theo file .docx, .pptx, … được lưu dưới định dạng 
+.pdf) chứng minh sự đáp ứng các tiêu chí của cuộc thi, gồm các nội dung: 
++ Thông tin thí sinh dự thi (Họ và tên, trường, số điện thoại liên lạc, …) 
++ Đặt vấn đề mà bản thân gặp phải và định hướng giải quyết khi sử dụng AI; 
++ Cung c ấp đầy đủ minh chứng Prompt (câu l ệnh), đặc biệt khuyến khích 
+báo cáo chi tiết quy trình xây dựng, điều chỉnh câu lệnh để đạt được kết quả tối 
+ưu nhất. 
++ Hiệu quả đạt được và bài học rút ra cho bản thân. 
+ 3. Tiêu chí đánh giá:  
+Nhóm tiêu chí Mô tả Điểm 
+1. Ý tưởng và 
+vấn đề thực tiễn 
+- Vấn đề được chọn có tính chân thực cao, g ần gũi với 
+đời sống sinh viên, có ý nghĩa thiết thực khi được xử lý 
+và giải quyết. 
+30 điểm 
+2. Cách sử dụng 
+AI (Prompt và 
+tư duy) 
+- Báo cáo đầy đủ về công cụ AI đã sử dụng, minh chứng 
+các câu lệnh đã sử dụng. 
+- Thể hiện tư duy câu lệnh logic, biết cách đóng vai (role-
+prompting), cung cấp bối cảnh (context) và định hướng 
+đầu ra (format) rõ ràng cho AI. 
+- Thể hiện được tư duy tương tác hai chiều, biết cách điều 
+chỉnh và cải thiện câu lệnh nhiều lần để AI cho ra kết quả 
+tối ưu nhất thay vì chỉ dùng một câu lệnh chung chung. 
+- Tối ưu công sức, thao tác sử dụng. 
+40 điểm 
+3. Tính ứng 
+dụng và hiệu 
+quả 
+- Kết quả đầu ra từ AI thực sự giải quyết triệt để vấn đề 
+đặt ra ban đầu 
+- Đưa ra được đánh giá cụ thể về mặt hiệu quả (Ví dụ: 
+tiết kiệm được bao nhiêu giờ đồng hồ, điểm số tăng như 
+thế nào, quy trình làm việc được rút gọn ra sao) 
+- Nêu được bài học kinh nghiệm sâu sắc, có khả năng 
+truyền cảm hứng và dễ dàng để các sinh viên khác áp 
+dụng theo. 
+20 điểm 
+4. Diễn đạt và 
+trình bày 
+- Đảm bảo cấu trúc trình bày theo yêu cầu. 
+- Văn phong mạch lạc, lập luận logic, ngôn ngữ rõ ràng 
+và tuyệt đối không mắc lỗi chính tả. 
+- Báo cáo sáng tạo, thể hiện bản sắc cá nhân. 
+10 điểm 
+ Ban Giám khảo sẽ chấm điểm các bài thi dựa trên bảng tiêu chí và công bố 
+điểm tại website của chương trình trước ngày 10/7/2026. 
+ 4. Lưu ý:  
+ Thí sinh được phép sử dụng chính công cụ AI để hỗ tr ợ, chỉnh sửa và hoàn 
+thiện báo cáo. Tuy nhiên, nội dung bài dự thi bắt buộc phải có dấu ấn cá nhân rõ 
+ràng và là trải nghiệm thật của thí sinh.  
+ Để đảm bảo chất lượng và tính công bằng, minh bạch cho các bài thi, Ban 
+Tổ chức sẽ tiến hành kiểm tra nội dung sao chép, trùng lặp đồng thời kiểm tra và 
+xác minh ngẫu nhiên đối với các bài dự thi đạt kết quả cao thông qua thông tin thí 
+sính cung cấp. 
+ Các bài dự thi sẽ bị loại trực tiếp nếu vi phạm một trong các trường hợp sau: 
+ - Sao chép, trùng lặp nội dung với thí sinh khác, không chứng minh được 
+quá trình làm bài và tính xác thực của trải nghiệm  
+ - Không cung cấp prompt hợp lệ hoặc prompt không khớp với kết quả đầu ra. 
+B. BẢNG B - CHALLENGER 
+1. Vòng 1  
+- Các đội đăng ký tài khoản trên website http://hackaithon.vsds.vn, đăng ký 
+dự thi và nộp ý tưởng từ ngày 02/6 đến ngày 16/6/2026. 
+- Từ danh mục API mà BTC cung cấp, các đội thi đề xuất một ý tưởng giải 
+pháp AI phù hợp với các lĩnh vực trọng điểm nêu trên. 
+Bài dự thi bao gồm:  
+- Bản miêu tả ý tưởng (trình bày theo file .docx, .pptx, … được lưu dưới định 
+dạng .pdf) chứng minh sự đáp ứng các tiêu chí của cuộc thi, gồm các nội dung: 
++ Tên sản phẩm, dự án; 
++ Thông tin đội thi (Thông tin thành viên, trường, số điện thoại liên lạc, …) 
++ Đặt vấn đề và cách giải quyết; 
++ Thiết kế tổng quan; 
++ Phương hướng triển khai; 
++ Video thuyết minh (không bắt buộc). 
+Tiêu chí đánh giá 
+Nhóm tiêu chí Mô tả Điểm 
+1. Tính phù hợp đề bài 
+- Bám sát đề bài của Ban tổ chức 
+- Phân tích paint - point của khách hàng 
+mục tiêu và người dùng cuối (có sử dụng 
+số liệu thực tế để chứng minh) 
+- Nêu lý do “vì sao AI” cho bài toán này 
+25 điểm 
+2. Tính đổi mới và 
+khác biệt 
+- Ý tưởng mới so với giải pháp đang có trên 
+thị trường/ thư viện open-source. Tiêu chí 
+đạt khi chứng minh không có sản phẩm 
+20 điểm 
+tương tự hoặc khác biệt >= 30% tính năng 
+cốt lõi. 
+- So sánh và phân tích với giải pháp tương 
+tự hiện có để chứng minh tính đổi mới và 
+khác biệt 
+3. Tính khả thi 
+- Nguồn dữ liệu và nhân lực hợp pháp 
+- Kỹ thuật build/ deploy khả thi 
+- Ước tính chi phí hạ tầng và vận hành 
+- Đảm bảo an toàn bảo mật và tính pháp lý 
+theo pháp luật hiện hành tại Việt Nam 
+- Lộ trình GTM dự kiến/ road map giải 
+pháp sau cuộc thi 
+25 điểm 
+4. Tác động dự kiến 
+- Lợi ích xã hội/ kinh doanh mà giải pháp 
+mang lại 
+- Ước tính TAM -SAM-SOM hoặc số 
+người dùng tiềm năng 
+- Phân tích ưu thế cạnh tranh của ý tưởng 
+khi triển khai trên thị trường 
+- Mô hình doanh thu/ giá trị mang lại 
+20 điểm 
+5. Chất lượng hồ sơ 
+- Proposal trình bày logic 
+- Sơ đồ kiến trúc minh họa (wireframe 
+figma) 
+- Ngôn ngữ rõ ràng, không lỗi chính tả 
+10 điểm 
+ Dựa trên các tiêu chí đánh giá, Ban Giám khảo sẽ chọn ra tối đa 20 tác phẩm 
+vào Vòng 2, công bố trước ngày 26/6/2026. 
+  
+ 2. Vòng 2  
+ - Từ ngày 26/6 - 03/7/2026, các đội thi Các đội thi tiếp tục phát triển ý tưởng 
+đã được chọn thành sản phẩm MVP có thể trình diễn và kiểm thử. Ban Tổ chức 
+sắp xếp Mentor tham gia tư vấn trực tiếp, hỗ trợ các đội và cung cấp tài nguyên 
+API để tích hợp module AI, hỗ trợ hoàn thiện tối đa sản phẩm. 
+Danh sách API được cung cấp: 
+STT API cung cấp Mô tả 
+1 VNPT eKYC Nền tảng định danh và xác thực điện tử  
+1.1 OCR OCR bóc tách thông tin giấy tờ tùy thân 
+1.2 Liveness card 
+Liveness face 
+Mask face 
+Kiểm tra giấy tờ thật giả 
+Kiểm tra khuôn mặt thật giả 
+Kiểm tra khuôn mặt che 
+1.3 Compare face So sánh 2 khuôn mặt 
+2 vnFace Nền tảng điểm danh nhận diện khuôn mặt 
+2.1 Dịch vụ vnface Xây dựng và quản lý face  
+Lấy lịch sử check in điểm danh 
+Gửi thông báo các kênh OTT 
+3 VNPT SmartVoice Nền tảng giọng nói thông minh 
+3.1 Text to Speech Text to Speech 
+3.2 Speech to Text Speech to Text 
+3.3 Tóm tắt cuộc gọi Tóm tắt nội dung từ các cuộc hội thoại 
+4 VNPT Smartbot Nền tảng khởi tạo chatbot AI 
+4.1 Dịch vụ Smartbot Nhận diện ý định và trả lời theo kịch bản  
+4.2 Dịch vụ Smartbot nâng cao Hỏi đáp dung LLM 
+5 VNPT SmartReader Nền tảng xử lý văn bản thông minh  
+5.1 OCR Nhận dạng ký tự quang học 
+5.2 Bóc tách thông tin Bóc tách thông tin 
+6 vnSocial Nền tảng lắng nghe Mạng xã hội 
+6.1 Tài khoản Lấy thông tin trending trên MXH 
+6.2 Phân tích cảm xúc Phân tích c ảm xúc trong bình lu ận, bài đăng 
+trên MXH 
+7 VNPT SmartUX Nền t ảng tăng tr ải nghi ệm ngư ời dùng 
+UI/UX 
+7.1 Dịch vụ SmartUX Thu th ập và tr ực quan hóa tương tác ngư ời 
+dùng trên web/app tích hợp 
+8 VNPT SmartVision Nền tảng nhận diện và xử lý hình ảnh  
+8.1 Phát hiện người Phát hiện người trong khung hình/video 
+8.2 Phát hi ện bi ển s ố, phương 
+tiện 
+Phát hiện biển số xe và phương tiện di chuyển 
+trong giao thông 
+8.3 Nhận diện khuôn mặt Nhận diện và phát hiện khuôn mặt người xuất 
+hiện trong khung hình, video 
+ - Trong quá trình triển khai hoàn thiện, mentor đánh giá sản phẩm các đội 
+dựa trên hiệu quả làm việc, mức độ khả thi và độ hiểu của tác giả về sản phẩm để 
+chọn ra tối đa 06 đội xuất sắc nhất vào vòng Chung kết. 
+Tiêu chí đánh giá: 
+Nhóm tiêu chí Mô tả Điểm 
+1. Hoàn thiện sản 
+phẩm 
+- Demo MVP 
+- Repo + hướng dẫn cài đặt 1-lệnh 
+- Script test tự động/ pass 
+- Ổn định (không lỗi, chạy >= 3 lần) 
+- Đảm bảo an toàn thông tin và bảo mật dữ liệu 
+20 điểm 
+2. Trải nghiệm 
+người dùng 
+- Xác định và hiểu rõ đối tượng mục tiêu 
+- Đáp ứng các nhu cầu chính của đối tượng mục tiêu 20 điểm 
+- Hoạt động trên thiết bị ưu tiên của đối tượng mục 
+tiêu 
+- Tối ưu công sức, thao tác sử dụng 
+- Tối ưu giao diện người dùng (user interface) và 
+khả năng tiếp cận (accessibility) 
+- Đảm bảo tính nhất quán 
+- Thiết kế trải nghiệm dựa trên cơ sở dữ liệu (data), 
+các tiêu chuẩn thiết kế (principles) 
+- Xây dựng bộ chỉ số đo lường trải nghiệm (UX 
+Metrics) và lộ trình liên tục tối ưu (Plan) khi sản 
+phẩm được đưa ra thị trường. 
+3. Khả năng triển 
+khai và mở rộng 
+- Tính tối ưu trên các hạ tầng 
+- Phương án tăng cường khi mở rộng quy mô 20 điểm 
+4. Chiến lược Go-
+to-market 
+- Xác định phân khúc khách hàng và mô hình doanh 
+thu. 
+- Chiến lược định giá, doanh thu và chi phí trên mỗi 
+đơn vị tính của sản phẩm (requests, packages, …). 
+- Kênh phân phối/ đối tác/ alliances. 
+- Chiến thuật truyền thông giải pháp. 
+- Lộ trình mở rộng quy mô thị trường trong 12 
+tháng. 
+25 điểm 
+5. Tính nâng cấp 
+- Cải tiến so với bản mô tả vòng 1 
+- Phản hồi của mentor được áp dụng  
+- Bổ sung tính năng phụ hữu ích 
+10 điểm 
+  
+ 3. Vòng 3 - Chung kết 
+ - HackAIthon:  
+ + Thời gian: Dự kiến ngày 14, 15/7/2026. 
++ Địa điểm: Dự kiến tại Hà Nội 
+(Ban Tổ chức sẽ hỗ trợ chi phí ăn nghỉ, đi lại đối với các đội tham dự chung 
+kết không ở trên địa bàn tổ chức.) 
++ Hình thức: Các đội thi tham gia HackAIthon tập trung tại địa điểm chỉ 
+định của Ban Tổ chức trong 24 giờ đ ể tập trung giải quyết một nhiệm vụ bí mật 
+dựa trên những kiến thức, kỹ năng và kinh nghiệm đã được rèn luyện và đúc kết 
+cùng các Mentor của BTC. Kết quả của HackAIthon được BGK đánh giá dựa trên 
+bộ tiêu chí với tổng điểm tối đa là 20 điểm. 
+- Đêm chung kết: Top 6 đội thi sẽ trình bày sản phẩm trước BGK trong đêm 
+chung kết để tìm ra đội thắng cuộc. 
+ + Tiêu chí đánh giá 
+Nhóm tiêu chí Mô tả Điểm 
+Pitching và trả lời câu 
+hỏi của Ban giám khảo 
+- Mỗi đội có tối đa 10 phút trình bày giới thiệu 
+sản phẩm (5) 
+- Live-demo sản phẩm hấp dẫn, thu hút (5) 
+- Trả lời câu hỏi của Ban Giám khảo và câu hỏi 
+phản biện từ các đội thi khác. (5) 
+- Đáp ứng yêu cầu về thời gian (5) 
+20 điểm 
+ - Kết quả chung cuộc: Điểm tổng kết được tính bằng tổng điểm của phần 
+thi HackAIthon và phần thi Đêm chung kết. 
+  C. BẢNG C - INNOVATOR 
+ 1. Vòng 1 
+ - Các đội đăng ký tài khoản trên website http://hackaithon.vsds.vn, đăng ký 
+dự thi từ ngày 02/6/2026 - 23/6/2026. 
+- Các mô hình có thể sử dụng: 
+1. Large Language Model (LLM) 
+a. Qwen3.5 Series (Các model <= 9B) 
+b. Gemma-4 Series 
+2. Mô hình Embedding/Rerank 
+a. BGE-m3 
+b. Qwen-Rerank 
+Yêu cầu đầu ra:  
+- Docker Container: Docker hub. 
+- Entry-point: Đọc public_test.csv hoặc private_test.csv tại /data, ghi 
+pred.csv vào /output với hai cột: qid,answer (A/B/C/D). 
+- Github chứa code và các chạy reproduce kết quả trong container. 
+- Tài liệu thuyết minh phương pháp: Định dạng tuỳ chọn với mục tiêu thể hiện 
+được rõ nhất tính sáng tạo, hiệu quả của chiến lược tối ưu mô hình đã lựa chọn. 
+Kết quả: Các cá nhân/đội thi xem trực tiếp kết quả trên leaderboard. Trong 
+vòng 72h kể từ khi kết thúc vòng 1, các cá nhân/đội thi phải gửi đầy đủ tài liệu 
+được BTC yêu cầu trong mục “Yêu cầu đầu ra”. Các đội thi không gửi lại theo 
+thời hạn sẽ tự động bị loại khỏi cuộc thi. 
+ 2. Vòng 2 
+- Ngày 26/6/2026: Đội thi nộp phiên bản Docker cuối cùng đã được tinh 
+chỉnh và sẵn sàng kiểm chứng. BTC sẽ thực hiện đánh giá trên bộ private test gồm 
+2000 câu hỏi, với các tiêu chí:  
++ Độ chính xác (Accuracy) 
++ Thời gian inference (Reg/s) 
++ Tư duy tối ưu & sáng tạo 
+ - Từ 26/6 - 03/7/2026, Ban Tổ chức tiến hành đánh giá sản phẩm và chọn ra 
+top 6 đội tốt nhất theo các tiêu chí 
+Nhóm tiêu chí Mô tả Điểm 
+1. Accuracy 
+Điểm Accuracy được xác định bằng công thức: 
+a / num_private_sample * 100% * 70 
+Trong đó: a - số câu trả lời đúng 
+80 điểm 
+2. Thời gian 
+inference 
+Đội thi có thời gian inference nhanh nhất đạt điểm 
+tối đa (10 điểm). Các đội xếp tiếp theo được xác 
+định điểm bằng công thức: y/x * 100% * 10 
+Trong đó: 
+y: Thời gian inference của đội được đánh giá 
+x: Thời gian inference của đội nhanh nhất 
+10 điểm 
+3. Ý tưởng Điểm tính trên đánh giá về phương pháp tối ưu 
+sáng tạo, hiệu quả, khả thi của dự án 10 điểm 
+ 3. Vòng 3 
+- Thời gian: Dự kiến ngày 15/7/2026 
+ - Hình thức: Trực tuyến, mỗi đội có tối đa 08 phút trình bày giới thiệu sản phẩm. 
+ + Live-demo sản phẩm hấp dẫn, thu hút 
+ + Trả lời câu hỏi của Ban Giám khảo và câu hỏi phản biện từ các đội thi. 
+V. GIẢI THƯỞNG 
+A. BẢNG A - EXPLORER 
+- 01 Giải Nhất: 3.000.000 đồng, Bằng khen của Trung ương Hội Sinh viên 
+Việt Nam. 
+- 01 Giải Nhì: 2.000.000 đ ồng, Bằng khen c ủa Trung ương H ội Sinh viên 
+Việt Nam. 
+- 01 Giải Ba: 1.000.000 đồng, Bằng khen của Trung ương Hội Sinh viên Việt Nam. 
+- 5 giải Khuyến khích: 500.000 đồng, Bằng khen của Trung ương Hội Sinh 
+viên Việt Nam 
+B. BẢNG B - CHALLENGER 
+- 01 Giải Nhất: 20.000.000 đồng, Bằng khen của Trung ương Hội Sinh viên 
+Việt Nam và giải thưởng từ nhà tài trợ. 
+- 01 Giải Nhì: 15.000.000 đồng, Bằng khen của Trung ương Hội Sinh viên 
+Việt Nam và giải thưởng từ nhà tài trợ. 
+- 01 Giải Ba: 10.000.000 đồng, Bằng khen của Trung ương Hội Sinh viên 
+Việt Nam và giải thưởng từ nhà tài trợ 
+- 03 Giải Khuyến khích: 5.000.000 đồng, Bằng khen của Trung ương Hội 
+Sinh viên Việt Nam và giải thưởng từ nhà tài trợ. 
+- 01 Giải Đội thi được yêu thích nhất: 5.000.000 đồng, Giấy chứng nhận của 
+Trung ương Hội Sinh viên Việt Nam và giải thưởng từ nhà tài trợ. 
+ 
+C. BẢNG C - INNOVATOR 
+- 01 Giải Nhất: 20.000.000 đồng, Bằng khen của Trung ương Hội Sinh viên 
+Việt Nam và giải thưởng từ nhà tài trợ. 
+- 01 Giải Nhì: 15.000.000 đồng, Bằng khen của Trung ương Hội Sinh viên 
+Việt Nam và giải thưởng từ nhà tài trợ. 
+- 01 Giải Ba: 10.000.000 đồng, Bằng khen của Trung ương Hội Sinh viên 
+Việt Nam và giải thưởng từ nhà tài trợ 
+- 03 Giải Khuyến khích: 5.000.000 đồng, Bằng khen của Trung ương Hội 
+Sinh viên Việt Nam và giải thưởng từ nhà tài trợ. 
+D. KHEN THƯỞNG TẬP THỂ 
+- 05 giải dành cho 05 tỉnh/ thành phố có số lượng bài dự thi tham gia Bảng 
+A và Bảng B nhiều nhất (tối thiểu 20.000 bài dự thi/ đơn vị) gồm: Bằng khen của 
+Trung ương Hội sinh viên Việt Nam và phần thưởng trị giá 10.000.000 đồng/ giải. 
+- 05 giải dành cho 05 trường có số lượng bài dự thi tham gia Bảng A và Bảng 
+B nhiều nhất (tối thiểu 10.000 bài dự thi/ đơn vị) gồm: Bằng khen của Trung ương 
+Hội sinh viên Việt Nam và phần thưởng trị giá 5.000.000 đồng/ mỗi giải. 
+VI. QUY ĐỊNH KHÁC 
+- Sản phẩm dự thi không phải là đối tượng tranh chấp bản quyền tác giả. 
+- Các đội thi phải chịu trách nhiệm về sở hữu trí tuệ của sản phẩm, sự chính 
+xác của thông tin trong hồ sơ cung cấp cho Ban Tổ chức.  
+- Ban Tổ chức được quyền sử dụng các thông tin về đội thi và dự án trong 
+công tác truyền thông; được quyền chụp ảnh, quay phim, ghi âm lại trong quá 
+trình tổ chức. 
+- Trong quá trình tổ chức Cuộc thi, nếu gặp những vấn đề phát sinh ngoài 
+quy định của Thể lệ này, Ban tổ chức sẽ xem xét sửa đổi, bổ sung cho phù hợp 
+với tình hình thực tiễn và thông báo tới các đơn vị, các đội thi. 
+Thông tin chi tiết liên hệ: 
+- Đồng chí Nguyễn Tuấn Hùng - Cán bộ Trung tâm Hỗ trợ và Phát triển Sinh 
+viên Việt Nam, SĐT: 0384.791.202; email: hackaithon@vsds.vn 
+ 
