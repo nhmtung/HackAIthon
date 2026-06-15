@@ -558,6 +558,30 @@ At the start of every conversation or task:
 - ❌ Never modify this AGENTS.md file without explicit user instruction.
 - ❌ Never assume the private test schema is identical to the public test — always code defensively.
 
+### §10.4 AUTOMATED VIBE-GIT WORKFLOW (AUTONOMOUS SKILLS)
+
+You (the AI Agent) are granted autonomous permission to execute local Git commands under the following strict state-machine rules:
+
+#### Trigger Conditions (When to Commit)
+- **DO NOT** commit on minor typos or halfway through coding.
+- **MUST** automatically trigger a commit loop immediately after:
+  1. A code modification passes the validation test script successfully.
+  2. A core architectural refactoring is completed (e.g., changes to `data_loader.py` or prompt wrappers).
+  3. Performance statistics inside `docs/CHANGELOG.md` are updated.
+
+#### Execution Routine Sequence
+When a trigger condition is met, you must execute these steps sequentially using your terminal/command execution tool:
+1. Run `git pull origin main` to fetch and rebase any upstream syncs.
+2. Run `git add .` to stage the changes (relying strictly on `.gitignore` boundaries).
+3. Generate a conventional commit message based on the task:
+   - Schema: `<type>(<scope>): <short description>` (e.g., `feat(ingest): implement try-catch in json data parser`).
+4. Execute `git commit -m "<your_generated_message>"`.
+5. Execute `git push origin main` to broadcast the state to GitHub.
+6. Print a clear execution walkthrough to the developer: "🚀 Autonomous Sync Completed: [Commit Hash] - [Commit Message]".
+
+#### Failure Mitigation
+- If `git push` fails due to a merge conflict, stop immediately, do not use `--force`, print the git log error, and ask the developer for visual alignment intervention.
+
 ---
 
 *End of Constitution. All directives are active and binding.*

@@ -4,6 +4,26 @@ All notable pipeline increments, accuracy measurements, inference speed benchmar
 
 Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) with additional columns for metrics tracking.
 
+## [v0.1.0] — 2026-06-15
+
+### 🏗️ Added
+- Project directory tree: `src/utils/`, `src/inference/`, `src/eval/`, `scripts/`, `workflows/`, `data/`, `output/`
+- Bootstrap dependencies in `requirements.txt` with Windows compatibility fallback comments
+- Lightweight entrypoint `src/main.py`
+- Environment verification script `scripts/verify_env.py`
+
+### 📊 Metrics
+| Metric | Value | Delta vs. Previous | Notes |
+|---|---|---|---|
+| Accuracy (Public Test) | — | — | Not yet measured |
+| Inference Speed (Req/s) | — | — | Not yet measured |
+| Model | — | — | Local debugging with CPU / Hugging Face; Docker with vLLM |
+| Quantization | — | — | Not yet applied |
+
+### 📝 Notes
+- Phase 0 Environment Bootstrap completed.
+- Verification script verified Python version 3.11.15 and local CPU status. PyTorch CPU fallback confirmed for local development.
+
 ---
 
 ## [v0.0.0] — 2026-06-15
