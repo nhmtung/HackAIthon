@@ -1,15 +1,7 @@
 # -*- coding: utf-8 -*-
 """
 vLLM Inference Engine — with Hugging Face transformers fallback for Windows.
-
-Conforms to AGENTS.md §1.2, §2.5:
-  - Only loads approved models from the registry.
-  - Deterministic decoding: temperature=0, top_p=1.0, max_tokens=16, seed=42.
-  - Batch inference support.
-
-Priority:
-  1. vLLM (Linux/Docker — production)
-  2. Hugging Face transformers pipeline (Windows — local dev)
+Supports dynamic quantization modes, batch size settings, and memory/KV-cache tuning.
 """
 import logging
 import sys
@@ -19,17 +11,16 @@ logger = logging.getLogger(__name__)
 if not logger.handlers:
     logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(message)s")
 
-# Default model — from Approved Model Registry (§1.2)
-DEFAULT_MODEL = "Qwen/Qwen3.5-7B"
+# Import configurations
+from src.inference.model_config import MODEL_REGISTRY
+
+DEFAULT_MODEL = MODEL_REGISTRY["fp16"]
 
 
 class VLLMEngine:
     """
     Inference engine wrapping vLLM (preferred) with HuggingFace fallback.
-
-    Usage:
-        engine = VLLMEngine(model_name="Qwen/Qwen3.5-7B")
-        outputs = engine.generate(["prompt1", "prompt2"])
+    Supports advanced configurations for performance tuning.
     """
 
     def __init__(
@@ -40,6 +31,12 @@ class VLLMEngine:
         top_p: float = 1.0,
         seed: int = 42,
         gpu_memory_utilization: float = 0.90,
+        quantization: Optional[str] = None,
+        max_model_len: Optional[int] = None,
+        enable_prefix_caching: bool = True,
+        max_num_batched_tokens: Optional[int] = None,
+        max_num_seqs: Optional[int] = None,
+        tensor_parallel_size: int = 1,
     ) -> None:
         self.model_name = model_name
         self.max_tokens = max_tokens
@@ -47,6 +44,12 @@ class VLLMEngine:
         self.top_p = top_p
         self.seed = seed
         self.gpu_memory_utilization = gpu_memory_utilization
+        self.quantization = quantization
+        self.max_model_len = max_model_len
+        self.enable_prefix_caching = enable_prefix_caching
+        self.max_num_batched_tokens = max_num_batched_tokens
+        self.max_num_seqs = max_num_seqs
+        self.tensor_parallel_size = tensor_parallel_size
 
         self._backend: str = "none"
         self._llm = None  # vLLM LLM instance
@@ -63,12 +66,27 @@ class VLLMEngine:
                 from vllm import LLM, SamplingParams
 
                 logger.info(f"[vLLM] Loading model: {self.model_name}")
-                self._llm = LLM(
-                    model=self.model_name,
-                    gpu_memory_utilization=self.gpu_memory_utilization,
-                    trust_remote_code=True,
-                    seed=self.seed,
-                )
+                
+                # Setup configuration kwargs
+                kwargs = {
+                    "model": self.model_name,
+                    "gpu_memory_utilization": self.gpu_memory_utilization,
+                    "trust_remote_code": True,
+                    "seed": self.seed,
+                    "enable_prefix_caching": self.enable_prefix_caching,
+                    "tensor_parallel_size": self.tensor_parallel_size,
+                }
+                
+                if self.quantization:
+                    kwargs["quantization"] = self.quantization
+                if self.max_model_len is not None:
+                    kwargs["max_model_len"] = self.max_model_len
+                if self.max_num_batched_tokens is not None:
+                    kwargs["max_num_batched_tokens"] = self.max_num_batched_tokens
+                if self.max_num_seqs is not None:
+                    kwargs["max_num_seqs"] = self.max_num_seqs
+
+                self._llm = LLM(**kwargs)
                 self._sampling_params = SamplingParams(
                     temperature=self.temperature,
                     max_tokens=self.max_tokens,
@@ -103,11 +121,18 @@ class VLLMEngine:
                 self.model_name,
                 trust_remote_code=True,
             )
+            
+            # Simple model loading kwargs
+            model_kwargs = {
+                "torch_dtype": dtype,
+                "trust_remote_code": True,
+            }
+            if device == "cuda":
+                model_kwargs["device_map"] = "auto"
+                
             model = AutoModelForCausalLM.from_pretrained(
                 self.model_name,
-                torch_dtype=dtype,
-                device_map="auto" if device == "cuda" else None,
-                trust_remote_code=True,
+                **model_kwargs
             )
             if device == "cpu":
                 model = model.to(device)
@@ -126,7 +151,7 @@ class VLLMEngine:
         except Exception as e:
             logger.error(f"[HuggingFace] Failed to initialize pipeline: {e}")
 
-        # If both fail, set backend to 'none' — generate() will return fallback
+        # If both fail, set backend to 'none'
         logger.error(
             "[Engine] No inference backend available. "
             "generate() will return empty strings (fallback to 'A' via answer_extractor)."
@@ -141,13 +166,6 @@ class VLLMEngine:
     def generate(self, prompts: List[str]) -> List[str]:
         """
         Run batched inference on a list of prompts.
-
-        Args:
-            prompts: List of formatted prompt strings.
-
-        Returns:
-            List of raw model output strings (one per prompt).
-            On failure, returns empty strings (answer_extractor will fallback to 'A').
         """
         if not prompts:
             return []
@@ -176,7 +194,7 @@ class VLLMEngine:
             return [""] * len(prompts)
 
     def _generate_hf(self, prompts: List[str]) -> List[str]:
-        """Generate using HuggingFace pipeline backend (one-by-one for safety)."""
+        """Generate using HuggingFace pipeline backend (one-by-one)."""
         results: List[str] = []
         for i, prompt in enumerate(prompts):
             try:
@@ -185,7 +203,7 @@ class VLLMEngine:
                     max_new_tokens=self.max_tokens,
                     temperature=self.temperature if self.temperature > 0 else None,
                     top_p=self.top_p,
-                    do_sample=False,  # Greedy decoding (temperature=0)
+                    do_sample=False,  # Greedy decoding
                     return_full_text=False,
                 )
                 text = out[0]["generated_text"] if out else ""

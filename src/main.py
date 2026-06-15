@@ -115,6 +115,12 @@ def main() -> None:
         choices=["zero_shot", "few_shot", "cot", "routed", "mixed_lang"],
         help="Prompt template style/routing strategy to use"
     )
+    # vLLM optimization parameters
+    parser.add_argument("--quantization", type=str, default="awq", choices=["awq", "gptq", "none"], help="vLLM quantization option")
+    parser.add_argument("--gpu_memory_utilization", type=float, default=0.90, help="GPU memory utilization factor")
+    parser.add_argument("--max_model_len", type=int, default=2048, help="Maximum context length limit")
+    parser.add_argument("--max_num_seqs", type=int, default=16, help="Maximum number of sequences per batch")
+    parser.add_argument("--tensor_parallel_size", type=int, default=1, help="Number of GPUs to partition model across")
     args = parser.parse_args()
 
     # ── Resolve paths ─────────────────────────────────────────────────────
@@ -171,7 +177,15 @@ def main() -> None:
         raw_outputs = ["A"] * len(prompts)
     else:
         logger.info("[Pipeline] Initializing inference engine...")
-        engine = VLLMEngine(model_name=args.model, max_tokens=max_tokens)
+        engine = VLLMEngine(
+            model_name=args.model,
+            max_tokens=max_tokens,
+            quantization=args.quantization if args.quantization != "none" else None,
+            gpu_memory_utilization=args.gpu_memory_utilization,
+            max_model_len=args.max_model_len,
+            max_num_seqs=args.max_num_seqs,
+            tensor_parallel_size=args.tensor_parallel_size,
+        )
         logger.info(f"[Pipeline] Backend: {engine.backend}")
         logger.info(f"[Pipeline] Running inference on {len(prompts)} prompts...")
         raw_outputs = engine.generate(prompts)
