@@ -4,6 +4,37 @@ All notable pipeline increments, accuracy measurements, inference speed benchmar
 
 Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) with additional columns for metrics tracking.
 
+## [v0.3.0] — 2026-06-15
+
+### 🏗️ Added
+- End-to-end zero-shot base pipeline (`src/main.py`) with `--dry-run` mode for format validation without GPU.
+- Answer extractor (`src/utils/answer_extractor.py`) implementing 4-tier regex extraction chain per AGENTS.md §2.3.
+- vLLM inference engine (`src/inference/vllm_engine.py`) with HuggingFace `transformers` fallback for Windows.
+- Pipeline runner & validator (`scripts/run_pipeline.py`) — executes pipeline and validates pred.csv schema.
+- Local accuracy evaluation script (`scripts/eval_accuracy.py`) — compares pred.csv against gold labels (when available).
+- Prompt builder (`src/utils/prompt_builder.py`) — Vietnamese zero-shot MCQ prompt with dynamic A–J label mapping.
+
+### ✏️ Changed
+- `src/main.py` upgraded from Phase 0 bootstrap stub to full pipeline entrypoint with argparse CLI.
+
+### 📊 Metrics
+| Metric | Value | Delta vs. Previous | Notes |
+|---|---|---|---|
+| Accuracy (Public Test) | — | — | No gold labels available yet; dry-run validates format only |
+| Inference Speed (Req/s) | — | — | Dry-run mode; actual model inference pending GPU |
+| Model | Qwen/Qwen3.5-7B | — | Placeholder; configurable via `--model` flag |
+| Output Validation | ✅ PASSED | — | 463/463 rows, all A-D, no duplicates, no nulls |
+| Total Questions | 463 | — | All questions produce valid predictions |
+
+### 📝 Notes
+- Phase 2 Base Pipeline — Naive Single-Shot completed.
+- Pipeline tested in `--dry-run` mode (no GPU required): all 463 questions produce valid `pred.csv`.
+- All validation checks pass: correct columns, row count, qid matching, answer domain {A,B,C,D}.
+- Dry-run defaults all answers to 'A' — baseline accuracy will be measured once model inference is enabled.
+- HuggingFace fallback engine available for Windows local development; vLLM used in Docker/Linux production.
+
+---
+
 ## [v0.2.0] — 2026-06-15
 
 ### 🏗️ Added
