@@ -4,6 +4,19 @@ All notable pipeline increments, accuracy measurements, inference speed benchmar
 
 Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) with additional columns for metrics tracking.
 
+## [v1.0.0] — 2026-06-15
+
+### 🏗️ Added
+- Created production `Dockerfile` leveraging NVIDIA CUDA 12.1 runtime base with python3 dependencies.
+- Added cross-platform Docker build scripts: bash (`scripts/build_docker.sh`) and PowerShell (`scripts/build_docker.ps1`).
+- Added cross-platform local validation scripts: bash (`scripts/test_docker_local.sh`) and PowerShell (`scripts/test_docker_local.ps1`) to run dry-run validation checks on the built image.
+- Documented system design, optimizations, prompting strategies, and metrics in `docs/technical_documentation.md`.
+- Added `SUBMISSION_CHECKLIST.md` tracking all submission verification items.
+
+### 📝 Notes
+- Phase 6 Docker Packaging & Final Submission completed.
+- Container structure tested and fully compliant with HackAIthon 2026 leaderboard specifications.
+
 ## [v0.6.0] — 2026-06-15
 
 ### 🏗️ Added
