@@ -9,21 +9,23 @@
 \usepackage{geometry}
 \usepackage{booktabs}
 \usepackage{listings}
+\usepackage{xcolor}
 \usepackage{tikz}
-\usetikzlibrary{shapes.geometric, arrows}
+\usetikzlibrary{shapes.geometric, arrows.meta}
 
 \geometry{left=2.5cm,right=2.5cm,top=2.5cm,bottom=2.5cm}
 
 \hypersetup{
     colorlinks=true,
     linkcolor=blue,
-    filecolor=magenta,      
+    filecolor=magenta,
     urlcolor=cyan,
-    pdftitle={Bao cao thuyet minh giai phap - HackAIthon Bieu dien C},
+    pdftitle={Bao cao thuyet minh giai phap - HackAIthon Bang C},
+    pdfauthor={Ngo Huy Manh Tung},
     pdfpagemode=FullScreen,
 }
 
-% Cấu hình code blocks
+% Cau hinh code blocks
 \lstset{
     language=Python,
     basicstyle=\ttfamily\small,
@@ -32,40 +34,49 @@
     commentstyle=\color{gray},
     breaklines=true,
     frame=single,
-    showstringspaces=false
+    showstringspaces=false,
+    literate={_}{\_}1
 }
 
-% Định nghĩa các khối flowchart
-\tikzstyle{startstop} = [rectangle, rounded corners, minimum width=3cm, minimum height=1cm,text centered, draw=black, fill=red!30]
-\tikzstyle{process} = [rectangle, minimum width=3cm, minimum height=1cm, text centered, draw=black, fill=orange!30]
-\tikzstyle{decision} = [diamond, minimum width=3cm, minimum height=1cm, text centered, draw=black, fill=green!30]
-\tikzstyle{arrow} = [thick,->,>=stealth]
+% Dinh nghia cac khoi flowchart
+\tikzstyle{startstop} = [rectangle, rounded corners, minimum width=3cm,
+    minimum height=1cm, text centered, draw=black, fill=red!30]
+\tikzstyle{process} = [rectangle, minimum width=3cm, minimum height=1cm,
+    text centered, draw=black, fill=orange!30, text width=3.5cm]
+\tikzstyle{decision} = [diamond, minimum width=3cm, minimum height=1cm,
+    text centered, draw=black, fill=green!30, text width=3cm]
+\tikzstyle{arrow} = [thick, ->, >=Stealth]
 
 \begin{document}
 
+%% ============================================================
+%%  TRANG BIA
+%% ============================================================
 \begin{titlepage}
     \centering
     \vspace*{1cm}
-    
+
     {\scshape\LARGE VIETNAMESE STUDENT HACKAITHON 2026\par}
     \vspace{0.5cm}
-    {\scshape\Large BẢNG C - INNOVATOR\par}
+    {\scshape\Large BẢNG C --- INNOVATOR\par}
     \vspace{1.5cm}
-    
+
     {\huge\bfseries BÁO CÁO THUYẾT MINH GIẢI PHÁP\par}
     \vspace{0.5cm}
-    {\large\itshape Hệ thống Hỏi-Đáp Trắc nghiệm Tự động Đa tác vụ (Multi-Task QA Engine)\par}
+    {\large\itshape Hệ thống Hỏi-Đáp Trắc nghiệm Tự động Đa tác vụ\par
+    (Multi-Task QA Engine)\par}
     \vspace{2cm}
-    
+
     \begin{minipage}{0.8\textwidth}
         \centering
-        \textbf{Thực hiện bởi:}\\
-        Đội thi Innovator \\
-        \vspace{0.5cm}
-        \textbf{Công nghệ sử dụng:}\\
-        vLLM, PyTorch, Qwen2.5-3B-Instruct, Docker, CUDA 12.2
+        \textbf{Thực hiện bởi:}\\[4pt]
+        {\large Ngô Huy Mạnh Tùng}\\[4pt]
+        \textit{Sinh viên cá nhân --- Bảng C (Innovator)}\\
+        \vspace{0.8cm}
+        \textbf{Công nghệ sử dụng:}\\[4pt]
+        vLLM, PyTorch, Qwen2.5-3B-Instruct, Docker, CUDA~12.2
     \end{minipage}
-    
+
     \vfill
     {\large Hà Nội, Tháng 6 Năm 2026\par}
 \end{titlepage}
@@ -73,91 +84,163 @@
 \tableofcontents
 \newpage
 
+%% ============================================================
 \section{Giới thiệu chung}
-Cuộc thi \textbf{Vietnamese Student HackAIthon 2026 - Bảng C (Innovator)} đặt ra thách thức về việc xây dựng một hệ thống suy luận tự động có khả năng trả lời các câu hỏi trắc nghiệm đa dạng (Multiple Choice Question Answering - MCQA) từ RAG, Toán học cho đến Kiến thức học thuật tổng quát. Hệ thống phải chạy hoàn toàn ngoại tuyến (offline) trong môi trường Docker Container với tài nguyên GPU giới hạn, đồng thời tối ưu hóa song song cả độ chính xác (Accuracy) lẫn thời gian đáp ứng (Latency) trên tập dữ liệu Private Test lên tới 2.000 câu hỏi.
+%% ============================================================
 
-Báo cáo này thuyết minh giải pháp kỹ thuật tích hợp các nghiên cứu tối ưu hóa từ arXiv và các giải pháp thực thi hiệu năng cao từ cộng đồng vLLM nhằm đạt được hiệu quả suy luận vượt trội.
+Cuộc thi \textbf{Vietnamese Student HackAIthon 2026 --- Bảng C (Innovator)} đặt ra
+thách thức xây dựng một hệ thống suy luận tự động có khả năng trả lời các câu hỏi
+trắc nghiệm đa dạng (Multiple-Choice Question Answering --- MCQA) từ RAG,
+Toán học cho đến Kiến thức học thuật tổng quát.
+Hệ thống phải chạy hoàn toàn ngoại tuyến (offline) trong môi trường Docker
+Container với tài nguyên GPU giới hạn, đồng thời tối ưu hóa song song cả
+độ chính xác (Accuracy) lẫn thời gian đáp ứng (Latency) trên tập dữ liệu
+Private Test lên tới 2.000 câu hỏi.
 
+Báo cáo này thuyết minh giải pháp kỹ thuật do \textbf{Ngô Huy Mạnh Tùng} cá nhân
+thiết kế và thực hiện, tích hợp các nghiên cứu tối ưu hóa từ arXiv và các giải
+pháp thực thi hiệu năng cao từ cộng đồng vLLM.
+
+%% ============================================================
 \section{Kiến trúc Hệ thống và Quy trình Xử lý}
+%% ============================================================
 
-Hệ thống được thiết kế theo mô hình luồng dữ liệu khép kín (End-to-End Pipeline) từ khâu đọc dữ liệu thô, định dạng, chạy suy luận qua mô hình ngôn ngữ lớn (LLM), lọc hậu xử lý cho đến xuất file báo cáo theo tiêu chuẩn BTC.
+Hệ thống được thiết kế theo mô hình luồng dữ liệu khép kín
+(End-to-End Pipeline) từ khâu đọc dữ liệu thô, định dạng Prompt,
+chạy suy luận qua mô hình ngôn ngữ lớn (LLM), lọc hậu xử lý
+cho đến xuất file báo cáo theo tiêu chuẩn BTC.
 
 \subsection{Sơ đồ Luồng xử lý (Pipeline Flow)}
-Hình \ref{fig:flowchart} mô tả chi tiết luồng hoạt động tuần tự của hệ thống đối với mỗi câu hỏi kiểm tra:
+
+Hình~\ref{fig:flowchart} mô tả chi tiết luồng hoạt động tuần tự
+của hệ thống đối với mỗi câu hỏi kiểm tra.
 
 \begin{figure}[h]
 \centering
-\begin{tikzpicture}[nodeDistance=1.8cm]
-    \node (start) [startstop] {Start};
-    \node (load) [process, below of=start] {Đọc private\_test.json \& Validate};
-    \node (loop) [process, below of=load] {Vòng lặp từng câu hỏi};
-    \node (router) [decision, below of=loop, yshift=-0.5cm] {Phân loại Câu hỏi (Router)};
-    
-    \node (cot) [process, left of=router, xshift=-2.5cm] {CoT + PoE (Toán/Logic)};
-    \node (few) [process, right of=router, xshift=2.5cm] {Few-shot (Factual/RAG)};
-    
-    \node (infer) [process, below of=router, yshift=-1.5cm] {vLLM Engine (Chat Template)};
-    \node (time) [process, below of=infer] {Đo Latency \& Regex Extractor};
-    \node (save) [startstop, below of=time] {Xuất CSV \& End};
-    
-    \draw [arrow] (start) -- (load);
-    \draw [arrow] (load) -- (loop);
-    \draw [arrow] (loop) -- (router);
-    \draw [arrow] (router) -- node[anchor=south] {Math} (cot);
-    \draw [arrow] (router) -- node[anchor=south] {RAG/Fact} (few);
-    \draw [arrow] (cot) |- (infer);
-    \draw [arrow] (few) |- (infer);
-    \draw [arrow] (infer) -- (time);
-    \draw [arrow] (time) -- (save);
+\begin{tikzpicture}[node distance=1.9cm]
+    \node (start)  [startstop]                              {Bắt đầu};
+    \node (load)   [process, below of=start]                {Đọc \texttt{private\_test.json} \& Validate};
+    \node (loop)   [process, below of=load]                 {Vòng lặp từng câu hỏi};
+    \node (router) [decision, below of=loop, yshift=-0.6cm] {Phân loại\\(Router)};
+
+    \node (cot) [process, left  of=router, xshift=-3.2cm]  {CoT + PoE\\(Toán/Logic)};
+    \node (few) [process, right of=router, xshift=3.2cm]   {Few-shot\\(Factual/RAG)};
+
+    \node (infer) [process, below of=router, yshift=-1.6cm] {vLLM Engine\\(Chat Template)};
+    \node (time)  [process, below of=infer]                  {Đo Latency \&\\Regex Extractor};
+    \node (save)  [startstop, below of=time]                 {Xuất CSV \& Kết thúc};
+
+    \draw [arrow] (start)  -- (load);
+    \draw [arrow] (load)   -- (loop);
+    \draw [arrow] (loop)   -- (router);
+    \draw [arrow] (router) -| node[near start, above] {Math}     (cot);
+    \draw [arrow] (router) -| node[near start, above] {RAG/Fact} (few);
+    \draw [arrow] (cot)    |- (infer);
+    \draw [arrow] (few)    |- (infer);
+    \draw [arrow] (infer)  -- (time);
+    \draw [arrow] (time)   -- (save);
 \end{tikzpicture}
 \caption{Sơ đồ luồng xử lý của hệ thống}
 \label{fig:flowchart}
 \end{figure}
 
 \subsection{Xử lý Dữ liệu phòng thủ (Defensive Data Processing)}
-Để đảm bảo chương trình không bị crash giữa chừng khi gặp dữ liệu lỗi trong 2.000 câu hỏi ẩn của BTC, module \texttt{data\_loader.py} được tích hợp cơ chế phòng thủ:
+
+Để đảm bảo chương trình không bị crash khi gặp dữ liệu lỗi trong
+2.000 câu hỏi ẩn của BTC, module \texttt{data\_loader.py} được tích hợp
+cơ chế phòng thủ:
 \begin{itemize}
-    \item \textbf{Cưỡng bức Encoding UTF-8:} Ngăn chặn triệt để lỗi giải mã hệ thống (UnicodeDecodeError) trên môi trường Docker Linux.
-    \item \textbf{Lớp bọc Try-Except toàn phần:} Nếu một câu hỏi bị mất trường \texttt{qid}, rỗng câu hỏi hoặc lỗi định dạng mảng lựa chọn (choices), hệ thống sẽ ghi nhận log cảnh báo và tự động gán nhãn dự phòng là ``A'' thay vì dừng toàn bộ tiến trình.
+    \item \textbf{Cưỡng bức Encoding UTF-8:} Ngăn chặn triệt để lỗi giải mã
+          hệ thống (\texttt{UnicodeDecodeError}) trên môi trường Docker Linux.
+    \item \textbf{Lớp bọc Try-Except toàn phần:} Nếu một câu hỏi bị mất
+          trường \texttt{qid}, rỗng câu hỏi hoặc lỗi định dạng mảng
+          lựa chọn (\texttt{choices}), hệ thống sẽ ghi nhận log cảnh báo
+          và tự động gán nhãn dự phòng là ``A'' thay vì dừng toàn bộ tiến trình.
 \end{itemize}
 
+%% ============================================================
 \section{Các Giải pháp Tối ưu hóa Độ chính xác (Accuracy)}
+%% ============================================================
 
-Dựa trên nghiên cứu lý thuyết từ các bài báo arXiv về cấu trúc Prompt và MCQA, đội thi đã áp dụng 3 kỹ thuật cốt lõi:
+Dựa trên nghiên cứu từ các bài báo arXiv về cấu trúc Prompt và MCQA,
+tác giả đã áp dụng 2 kỹ thuật cốt lõi:
 
 \subsection{Tự động định dạng Chat Template}
-Các mô hình ngôn ngữ nhỏ ($\le$ 5B parameters) được tinh chỉnh hướng dẫn (Instruction-tuned) rất nhạy cảm với cấu trúc đầu vào. Việc gửi raw text thuần túy khiến mô hình bị suy giảm hiệu năng nghiêm trọng.
-Giải pháp của chúng tôi là khởi tạo một tokenizer Hugging Face tương ứng song song với vLLM Engine. Trước khi đưa vào mô hình, prompt sẽ tự động chạy qua:
+
+Các mô hình ngôn ngữ nhỏ ($\leq$~5B parameters) được tinh chỉnh hướng dẫn
+(Instruction-tuned) rất nhạy cảm với cấu trúc đầu vào.
+Việc gửi raw text thuần túy khiến mô hình bị suy giảm hiệu năng nghiêm trọng.
+
+Giải pháp là khởi tạo \texttt{AutoTokenizer} Hugging Face song song với vLLM Engine.
+Trước khi đưa vào mô hình, prompt sẽ tự động chạy qua:
+
 \begin{lstlisting}
 formatted = tokenizer.apply_chat_template(
-    [{"role": "user", "content": raw_prompt}], 
-    tokenize=False, 
+    [{"role": "user", "content": raw_prompt}],
+    tokenize=False,
     add_generation_prompt=True
 )
 \end{lstlisting}
-Điều này giúp mô hình nhận diện đúng định dạng hội thoại gốc của nó (ví dụ cấu trúc ChatML của Qwen hoặc đầu cuối lượt của Gemma), kích hoạt chính xác cơ chế Attention đã được huấn luyện.
 
-\subsection{Phương pháp Loại trừ (Process of Elimination - PoE)}
-Đối với các câu hỏi phức tạp hoặc câu hỏi Toán học/Logic, thay vì yêu cầu mô hình giải trực tiếp (Chain-of-Thought truyền thống), prompt được nâng cấp để định hướng mô hình suy nghĩ theo phương pháp loại trừ:
+Điều này giúp mô hình nhận diện đúng định dạng hội thoại gốc của nó
+(ví dụ cấu trúc ChatML của Qwen hoặc đầu cuối lượt của Gemma),
+kích hoạt chính xác cơ chế Attention đã được huấn luyện.
+
+\subsection{Phương pháp Loại trừ (Process of Elimination --- PoE)}
+
+Đối với các câu hỏi phức tạp hoặc câu hỏi Toán học/Logic, thay vì yêu cầu
+mô hình giải trực tiếp (Chain-of-Thought truyền thống), prompt được nâng cấp
+để định hướng mô hình suy nghĩ theo phương pháp loại trừ:
 \begin{enumerate}
     \item Đánh giá khách quan thông tin của từng phương án A, B, C, D.
     \item Phân tích điểm sai logic để loại bỏ các phương án nhiễu.
-    \item Xác định phương án đúng cuối cùng và bắt buộc chốt cấu trúc ở dòng cuối cùng dạng \texttt{Đáp án: [X]}.
+    \item Xác định phương án đúng cuối cùng và bắt buộc chốt cấu trúc
+          ở dòng cuối dạng \texttt{Đáp án: [X]}.
 \end{enumerate}
-Kỹ thuật này giúp mô hình giảm thiểu hiện tượng ảo giác (hallucination) và nâng cao khả năng biện giải của mô hình.
+Kỹ thuật này giúp mô hình giảm thiểu hiện tượng ảo giác (hallucination)
+và nâng cao khả năng biện giải.
 
+%% ============================================================
 \section{Tối ưu hóa Hiệu năng và Độ trễ (Throughput \& Latency)}
+%% ============================================================
 
-Bởi vì BTC yêu cầu chạy vòng lặp tuần tự từng câu hỏi nhằm phục vụ công tác chấm điểm Latency công bằng giữa các đội, chúng ta không thể tận dụng cơ chế gom lô (batching) đồng thời quy mô lớn. Do đó, các kỹ thuật tối ưu hóa phần cứng được áp dụng trực tiếp vào cấu hình \texttt{vllm\_engine.py}:
+Bởi vì BTC yêu cầu chạy vòng lặp tuần tự từng câu hỏi nhằm phục vụ
+công tác chấm điểm Latency công bằng, không thể tận dụng cơ chế gom lô
+(batching) đồng thời quy mô lớn. Do đó, các kỹ thuật tối ưu hóa phần cứng
+được áp dụng trực tiếp trong \texttt{vllm\_engine.py}:
 
 \subsection{Prefix Caching (Bộ nhớ đệm Tiền tố)}
-Vì toàn bộ các câu hỏi đều sử dụng chung một hệ thống System Prompt hoặc Few-shot Prompt mẫu cố định ở phần đầu, tính năng \texttt{enable_prefix_caching=True} của vLLM được kích hoạt. vLLM sẽ tự động lưu giữ KV Cache của các token chung này trong bộ nhớ GPU, tránh việc phải tính toán lại từ đầu cho mỗi câu hỏi mới. Điều này giúp giảm độ trễ xử lý prompt (Prefill Latency) xuống gần như bằng 0 sau câu hỏi đầu tiên.
+
+Vì toàn bộ câu hỏi đều sử dụng chung System Prompt hoặc Few-shot Prompt
+cố định ở phần đầu, tính năng \texttt{enable\_prefix\_caching=True} của
+vLLM được kích hoạt. vLLM sẽ tự động lưu giữ KV Cache của các token chung
+trong bộ nhớ GPU, tránh tính toán lại từ đầu cho mỗi câu hỏi mới.
+Điều này giúp giảm độ trễ xử lý prompt (Prefill Latency) xuống gần bằng 0
+sau câu hỏi đầu tiên.
 
 \subsection{Giới hạn Token thông minh (Token Limiting)}
-- Đối với các câu hỏi lý thuyết trực tiếp (Zero-shot/Few-shot), mô hình chỉ cần sinh ra đúng chữ cái đáp án. Chúng tôi thiết lập cứng \texttt{max_tokens=8} giúp cắt giảm tối đa thời gian giải mã (Decode Latency).
-- Đối với câu hỏi suy luận sâu (CoT/PoE), mô hình được cấp tối đa \texttt{max_tokens=512} để đảm bảo không bị đứt đoạn giữa chừng khi đang phân tích loại trừ.
 
+\begin{itemize}
+    \item Đối với câu hỏi lý thuyết trực tiếp (Zero-shot/Few-shot),
+          mô hình chỉ cần sinh một chữ cái đáp án; tác giả thiết lập cứng
+          \texttt{max\_tokens=8} giúp cắt giảm tối đa thời gian giải mã
+          (Decode Latency).
+    \item Đối với câu hỏi suy luận sâu (CoT/PoE), mô hình được cấp
+          tối đa \texttt{max\_tokens=512} để đảm bảo không bị đứt đoạn
+          giữa chừng khi đang phân tích loại trừ.
+\end{itemize}
+
+%% ============================================================
 \section{Kết luận}
-Giải pháp xây dựng cho đội thi Innovator tại \textbf{Vietnamese Student HackAIthon 2026} là sự kết hợp hài hòa giữa kỹ thuật công nghệ suy luận tốc độ cao (\textbf{vLLM}) và các nghiên cứu khoa học hành vi của mô hình lớn (\textbf{Chat Template, PoE}). Hệ thống đã được kiểm tra toàn diện, sẵn sàng vượt qua các thử thách của tập dữ liệu Private Test để mang lại hiệu quả tối ưu nhất.
+%% ============================================================
+
+Giải pháp do \textbf{Ngô Huy Mạnh Tùng} xây dựng tại
+\textbf{Vietnamese Student HackAIthon 2026 --- Bảng C (Innovator)}
+là sự kết hợp hài hòa giữa kỹ thuật suy luận tốc độ cao
+(\textbf{vLLM + Prefix Caching}) và các nghiên cứu khoa học về hành vi
+mô hình lớn (\textbf{Chat Template, PoE}).
+Hệ thống đã được kiểm tra toàn diện qua bộ kịch bản xác thực nội bộ
+(\texttt{run\_full\_validation.py}), sẵn sàng vượt qua các thử thách của
+tập dữ liệu Private Test để mang lại hiệu quả tối ưu nhất.
 
 \end{document}
