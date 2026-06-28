@@ -88,3 +88,6 @@ huggingface_cache/
 *.h5
 *.onnx
 *.weights
+
+# CodeGraph Index Isolation
+.codegraph/
