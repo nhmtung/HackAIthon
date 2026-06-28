@@ -96,6 +96,14 @@ class VLLMEngine:
                 )
                 self._backend = "vllm"
                 logger.info("[vLLM] Engine initialized successfully.")
+                
+                # Load tokenizer to support chat templates
+                try:
+                    from transformers import AutoTokenizer
+                    self.tokenizer = AutoTokenizer.from_pretrained(self.model_name, trust_remote_code=True)
+                except Exception as e:
+                    logger.warning(f"[vLLM] Failed to load tokenizer for chat templates: {e}")
+                    
                 return
             except ImportError:
                 logger.warning("[vLLM] vllm package not installed. Falling back to HuggingFace.")
@@ -166,9 +174,27 @@ class VLLMEngine:
     def generate(self, prompts: List[str]) -> List[str]:
         """
         Run batched inference on a list of prompts.
+        Automatically applies Chat Templates if the model supports it.
         """
         if not prompts:
             return []
+
+        # Apply chat template if tokenizer is available and supports it
+        tokenizer = getattr(self, "tokenizer", None)
+        if tokenizer is None and hasattr(self, "_pipe") and self._pipe:
+            tokenizer = self._pipe.tokenizer
+            
+        if tokenizer and hasattr(tokenizer, "apply_chat_template"):
+            formatted_prompts = []
+            for p in prompts:
+                try:
+                    chat = [{"role": "user", "content": p}]
+                    formatted = tokenizer.apply_chat_template(chat, tokenize=False, add_generation_prompt=True)
+                    formatted_prompts.append(formatted)
+                except Exception as e:
+                    logger.debug(f"Chat template failed, using raw: {e}")
+                    formatted_prompts.append(p)
+            prompts = formatted_prompts
 
         if self._backend == "vllm":
             return self._generate_vllm(prompts)

@@ -134,7 +134,7 @@ def main() -> None:
     if not args.dry_run:
         logger.info("[Predict] Initializing inference engine...")
         # Step up token limits for CoT reasoning modes
-        max_tokens = 512 if args.prompt_mode in ["cot", "routed"] else 16
+        max_tokens = 512 if args.prompt_mode in ["cot", "routed"] else 8
         engine = VLLMEngine(
             model_name=args.model,
             max_tokens=max_tokens,
