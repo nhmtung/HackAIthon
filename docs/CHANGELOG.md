@@ -4,6 +4,20 @@ All notable pipeline increments, accuracy measurements, inference speed benchmar
 
 Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) with additional columns for metrics tracking.
 
+## [v1.2.0] — 2026-06-28
+
+### ⚙️ Optimized
+- Refined question type routing heuristics in [prompt_router.py](file:///e:/HackAIthon/src/utils/prompt_router.py) to improve classification accuracy for RAG-style passages and LaTeX math queries.
+- Expanded regex patterns in [answer_extractor.py](file:///e:/HackAIthon/src/utils/answer_extractor.py) to robustly capture bold Markdown styling (`**A**`), brackets (`[B]`), and Vietnamese conversational answer cues (e.g. "Vậy chọn B").
+- Added formal prompt optimization workflow guide at [optimization-loop.md](file:///e:/HackAIthon/workflows/optimization-loop.md).
+
+### 📊 Metrics
+| Metric | Value | Delta vs. Previous | Notes |
+|---|---|---|---|
+| Question Routing Accuracy | Improved Heuristics | High | Expanded keywords reduce classification mismatches |
+| Extraction Fallback Rate | Reduced | Low Risk | Better regex matching prevents fallback to default 'A' |
+| Format Validation | ✅ PASSED | Neutral | Output pred.csv complies with 2-column constraints |
+
 ## [v1.1.0] — 2026-06-28
 
 ### ✏️ Changed
