@@ -59,6 +59,12 @@ coverage.xml
 .DS_Store
 Thumbs.db
 
+# Claude Code / Agent local overrides
+CLAUDE.local.md
+*.local.json
+.claude/settings.local.json
+settings.local.json
+
 # Data & Original Contest Benchmarks Isolation
 /data/
 /output/

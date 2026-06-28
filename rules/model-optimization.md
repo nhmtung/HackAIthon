@@ -8,7 +8,7 @@ This document outlines the optimization directives for model loading, inference,
   * Default `gpu_memory_utilization` to `0.90` (unless experiencing unexpected OOM, then scale down to `0.85`).
   * Use continuous batching natively through `vllm.LLM` rather than manually iterating/batching.
 * **Context Truncation**:
-  * If a question context exceeds `max_model_len` (e.g. Qwen3.5 8K or 32K context window limits), implement aggressive truncation from the middle or front of the context to preserve critical system instructions and choices.
+  * If a question context exceeds `max_model_len` (e.g. Qwen2.5 8K or 32K context window limits), implement aggressive truncation from the middle or front of the context to preserve critical system instructions and choices.
 
 ## 2. Quantization (AWQ/GPTQ)
 * **4-bit Precision**: When loading Qwen or Gemma models, always attempt to run quantized models (e.g. AWQ, GPTQ) to maximize throughput and reduce VRAM occupancy.
