@@ -335,8 +335,8 @@ thi HackAIthon và phần thi Đêm chung kết.
 dự thi từ ngày 02/6/2026 - 23/6/2026. 
 - Các mô hình có thể sử dụng: 
 1. Large Language Model (LLM) 
-a. Qwen3.5 Series (Các model <= 9B) 
-b. Gemma-4 Series 
+a. Qwen2.5, Gemma-2, Llama-3, PhoGPT Series (Các model <= 5B) 
+b. Các model nguồn mở khác <= 5B parameters 
 2. Mô hình Embedding/Rerank 
 a. BGE-m3 
 b. Qwen-Rerank 

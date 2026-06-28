@@ -106,7 +106,7 @@ def main():
         try:
             print("[INFO] Initializing VLLMEngine...")
             engine = VLLMEngine(
-                model_name=MODEL_REGISTRY.get("awq", "Qwen/Qwen3.5-7B-AWQ"),
+                model_name=MODEL_REGISTRY.get("awq", "Qwen/Qwen2.5-3B-Instruct-AWQ"),
                 max_tokens=16 if args.prompt_mode not in ["cot", "routed"] else 512,
                 quantization="awq",
                 gpu_memory_utilization=0.90,

@@ -12,9 +12,9 @@ The **Antigravity Agent** is an end-to-end question-answering system designed to
 ---
 
 ## 2. Model Selection & Configuration
-- **Base Model:** `Qwen/Qwen3.5-7B`
+- **Base Model:** `Qwen/Qwen2.5-3B-Instruct`
   - Chosen for its state-of-the-art capability in multilingual comprehension, especially Vietnamese.
-  - Sized at 7B parameters to comfortably fit within common VRAM allocations (under 16GB VRAM ceiling).
+  - Sized at 3B parameters to comply with the 5B parameters limit of the competition.
 - **Quantization:** `AWQ (4-bit)`
   - AWQ quantization reduces model footprint by ~70% while keeping accuracy delta within <1.5% compared to FP16.
   - Significantly increases token generation throughput by fitting larger batches in VRAM.

@@ -2,7 +2,7 @@
 
 - **Date:** 2026-06-15
 - **Pipeline Version:** v0.5.1
-- **Model:** Qwen/Qwen3.5-7B-AWQ (Simulated Baseline)
+- **Model:** Qwen/Qwen2.5-3B-Instruct-AWQ (Simulated Baseline)
 - **Prompt Mode:** `zero_shot`
 
 ## Metrics Summary

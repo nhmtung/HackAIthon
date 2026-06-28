@@ -8,7 +8,7 @@ This repository contains the source code, system configurations, and optimizatio
 
 ## 2. Core Architecture Blueprint
 The application leverages a high-efficiency pipeline designed for local multi-choice reasoning tasks:
-* **Approved Base LLMs**: Integrated with `Qwen3.5` (≤ 9B) and `Gemma-4` families utilizing local deterministic inference.
+* **Approved Base LLMs**: Integrated with `Qwen2.5` (≤ 5B) and `Gemma-2-2B` families utilizing local deterministic inference.
 * **Retrieval-Augmented Generation (RAG)**: Uses the `BGE-m3` multilingual embedding model and `Qwen-Rerank` cross-encoder to dynamically query and insert highly relevant structural context into the prompt window.
 * **Extraction Pipeline**: Utilizes a robust 4-tier regular expression post-processing strategy to guarantee compliance with single-character multiple-choice answer formats under noisy or long outputs.
 * **Deterministic Configuration**: Hardcoded parameters (`temperature = 0`, `top_p = 1.0`, `max_tokens = 16`, `seed = 42`) guarantee reproducible evaluations across environments.

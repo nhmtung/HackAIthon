@@ -44,7 +44,7 @@
   └── data/                        # Local data directory (gitignored)
       └── public-test_1780368312.json
   ```
-- [ ] Download and cache primary model: `Qwen/Qwen3.5-7B` (or chosen variant)
+- [ ] Download and cache primary model: `Qwen/Qwen2.5-3B-Instruct` (or chosen variant)
 - [ ] Verify GPU availability and VRAM capacity
 
 ### Exit Criteria
@@ -146,7 +146,7 @@ python scripts/eval_accuracy.py --pred output/pred.csv --gold data/gold.csv  # i
   - RAG: "Dựa trên đoạn văn trên, ..."
   - Math: "Hãy tính toán từng bước, ..."
   - Factual: "Dựa trên kiến thức chung, ..."
-- [ ] **Experiment 3.4:** Thinking mode — if Qwen3.5 supports `/think` or `enable_thinking`, test it
+- [ ] **Experiment 3.4:** Thinking mode — if Qwen2.5 or other models support `/think` or `enable_thinking`, test it
 - [ ] **Experiment 3.5:** Language tuning — test Vietnamese-only vs. mixed prompts
 - [ ] Compare accuracy across all experiments, select best combination
 - [ ] Log all results in CHANGELOG with experiment IDs
@@ -184,7 +184,7 @@ python scripts/eval_accuracy.py --pred output/pred.csv --gold data/gold.csv  # i
 ### Key vLLM Parameters to Tune
 ```python
 llm = LLM(
-    model="Qwen/Qwen3.5-7B-AWQ",     # or chosen variant
+    model="Qwen/Qwen2.5-3B-Instruct-AWQ",     # or chosen variant
     quantization="awq",                # if using quantized model
     gpu_memory_utilization=0.90,
     max_model_len=4096,                # tune based on data analysis

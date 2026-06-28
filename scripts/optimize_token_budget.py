@@ -23,7 +23,7 @@ def main():
     parser = argparse.ArgumentParser(description="Optimize generation token budget for speed")
     parser.add_argument("--gold", type=str, default="data/gold_subset.csv", help="Path to gold ground truth CSV")
     parser.add_argument("--input", type=str, default="data/public-test_1780368312.json", help="Path to input test JSON")
-    parser.add_argument("--model", type=str, default="Qwen/Qwen3.5-7B", help="Model name or path")
+    parser.add_argument("--model", type=str, default="Qwen/Qwen2.5-3B-Instruct", help="Model name or path")
     parser.add_argument("--dry-run", action="store_true", help="Run simulated benchmarks (for testing script harness)")
     args = parser.parse_args()
 

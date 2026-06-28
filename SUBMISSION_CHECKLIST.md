@@ -7,6 +7,6 @@
 - [x] Technical documentation (`docs/technical_documentation.md`) is complete
 - [x] Entrypoint reads from `/data/*.csv` and writes to `/output/pred.csv`
 - [x] `pred.csv` format matches exactly 2 columns: `qid`, `answer`
-- [x] Model used is Qwen3.5 (≤9B) or Gemma-4
+- [x] Model used is ≤ 5B parameters (e.g. Qwen2.5-3B or Gemma-2-2B)
 - [x] All dependencies listed in `requirements.txt`
 - [x] No hardcoded paths that would break in container

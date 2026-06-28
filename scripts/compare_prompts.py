@@ -8,6 +8,12 @@ import time
 import argparse
 import pandas as pd
 
+# Force stdout/stderr to UTF-8 to prevent encoding errors on Windows when printing emojis
+if hasattr(sys.stdout, 'reconfigure'):
+    sys.stdout.reconfigure(encoding='utf-8')
+if hasattr(sys.stderr, 'reconfigure'):
+    sys.stderr.reconfigure(encoding='utf-8')
+
 _SRC_DIR = os.path.dirname(os.path.abspath(__file__))
 _PROJECT_ROOT = os.path.dirname(_SRC_DIR)
 if _PROJECT_ROOT not in sys.path:
@@ -22,7 +28,7 @@ def main():
     parser = argparse.ArgumentParser(description="Compare prompt templates on gold subset")
     parser.add_argument("--gold", type=str, default="data/gold_subset.csv", help="Path to gold ground truth CSV")
     parser.add_argument("--input", type=str, default="data/public-test_1780368312.json", help="Path to input test JSON")
-    parser.add_argument("--model", type=str, default="Qwen/Qwen3.5-7B", help="Model name or path")
+    parser.add_argument("--model", type=str, default="Qwen/Qwen2.5-3B-Instruct", help="Model name or path")
     parser.add_argument("--dry-run", action="store_true", help="Format and validation dry-run (returns random/mock answers)")
     args = parser.parse_args()
 

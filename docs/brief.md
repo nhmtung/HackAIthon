@@ -39,8 +39,7 @@ Track C requires individuals/teams to design an **AI Agent** using Large Languag
 
 | Model Series | Max Parameter Count | Notes |
 |---|---|---|
-| **Qwen3.5 Series** | ≤ 9B | Includes Qwen3.5-1.5B, Qwen3.5-4B, Qwen3.5-7B, etc. |
-| **Gemma-4 Series** | No explicit cap stated | Google DeepMind family |
+| **Qwen2.5 / Gemma-2 / PhoGPT Series** | ≤ 5B | Updated parameter ceiling to 5B. Includes Qwen2.5-3B, Gemma-2-2B, PhoGPT, etc. |
 
 ### 2.2 Supporting Models (Embedding / Rerank)
 

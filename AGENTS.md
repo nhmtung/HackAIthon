@@ -27,8 +27,7 @@ The following is the **COMPLETE AND EXHAUSTIVE** list of models that may be load
 
 | Model Family | Parameter Ceiling | Examples |
 |---|---|---|
-| **Qwen3.5 Series** | **≤ 9B parameters** | `Qwen/Qwen3.5-1.5B`, `Qwen/Qwen3.5-4B`, `Qwen/Qwen3.5-7B`, and quantized variants (AWQ, GPTQ, GGUF) of models ≤ 9B |
-| **Gemma-4 Series** | No explicit cap stated | `google/gemma-4-*` family |
+| **Qwen2.5 / Gemma-2 / PhoGPT Series** | **≤ 5B parameters** | `Qwen/Qwen2.5-3B-Instruct`, `google/gemma-2-2b-it`, PhoGPT, and quantized variants (AWQ, GPTQ, GGUF) of models ≤ 5B |
 
 #### Supporting Models (Embedding / Rerank)
 

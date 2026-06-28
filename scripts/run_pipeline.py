@@ -15,6 +15,12 @@ import subprocess
 import argparse
 import json
 
+# Force stdout/stderr to UTF-8 to prevent encoding errors on Windows when printing emojis
+if hasattr(sys.stdout, 'reconfigure'):
+    sys.stdout.reconfigure(encoding='utf-8')
+if hasattr(sys.stderr, 'reconfigure'):
+    sys.stderr.reconfigure(encoding='utf-8')
+
 import pandas as pd
 
 _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))

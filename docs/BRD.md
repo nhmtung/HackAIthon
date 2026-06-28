@@ -297,8 +297,8 @@ Only the following models may be loaded/referenced:
 
 ```
 # LLMs (pick one or combine)
-- Qwen/Qwen3.5-*  (any variant ≤ 9B parameters)
-- google/gemma-4-*
+- Qwen/Qwen2.5-*  (any variant ≤ 5B parameters)
+- google/gemma-2-*  (any variant ≤ 5B parameters)
 
 # Embedding / Rerank
 - BAAI/bge-m3

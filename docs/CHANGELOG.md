@@ -4,6 +4,24 @@ All notable pipeline increments, accuracy measurements, inference speed benchmar
 
 Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) with additional columns for metrics tracking.
 
+## [v1.1.0] — 2026-06-28
+
+### ✏️ Changed
+- Updated the base LLM from `Qwen/Qwen3.5-7B` to `Qwen/Qwen2.5-3B-Instruct` (and AWQ/GPTQ quantized variants) to comply with the new ≤ 5B parameters limit for Track C – INNOVATOR.
+- Reconfigured default models in `src/main.py`, `src/inference/model_config.py`, `scripts/optimize_token_budget.py`, `scripts/compare_prompts.py`, and `scripts/profile_performance.py`.
+- Reconfigured stdout and stderr stream encoding to UTF-8 in `scripts/run_pipeline.py`, `scripts/compare_prompts.py`, and `scripts/run_full_validation.py` to prevent emoji-related `UnicodeEncodeError` crashes on Windows platforms.
+- Updated all reference documents (`AGENTS.md`, `README.md`, `rules.txt`, `SUBMISSION_CHECKLIST.md`, `docs/brief.md`, `docs/BRD.md`, `docs/technical_documentation.md`, and `docs/plans/master-plan.md`) to reflect the new 5B parameter size limit.
+
+### 📊 Metrics
+| Metric | Value | Delta vs. Previous | Notes |
+|---|---|---|---|
+| Model | Qwen/Qwen2.5-3B-Instruct | Shift from 7B | Parameter size now compliant with ≤ 5B rule |
+| VRAM Usage (Est.) | ~7.5 GB | -4.5 GB | AWQ Int4 model footprint, very low risk of OOM |
+| Output Validation | ✅ PASSED | — | 3/3 questions on mock dataset pass all validation checks |
+
+### 📝 Notes
+- Verified end-to-end dry-run execution on a mock test dataset. The pipeline parses input JSON/CSV and outputs clean predicted CSV formats successfully.
+
 ## [v1.0.0] — 2026-06-15
 
 ### 🏗️ Added

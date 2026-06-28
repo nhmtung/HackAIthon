@@ -105,7 +105,7 @@ def main() -> None:
     parser = argparse.ArgumentParser(description="Multi-Task AI Agent — Track C Inference Pipeline")
     parser.add_argument("--input", type=str, default=None, help="Path to input file (JSON or CSV)")
     parser.add_argument("--output", type=str, default=None, help="Path to output pred.csv")
-    parser.add_argument("--model", type=str, default="Qwen/Qwen3.5-7B", help="Model name or path")
+    parser.add_argument("--model", type=str, default="Qwen/Qwen2.5-3B-Instruct", help="Model name or path")
     parser.add_argument("--max-tokens", type=int, default=16, help="Max tokens for generation")
     parser.add_argument("--dry-run", action="store_true", help="Skip inference, output all 'A'")
     parser.add_argument(
