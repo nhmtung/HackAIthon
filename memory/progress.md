@@ -7,4 +7,6 @@
   - Successfully mapped all files and references to compliant ≤ 5B parameter registry (`Qwen/Qwen2.5-3B-Instruct`).
   - Added mock test set and resolved Windows console encoding bugs.
   - Formatted workspace to match the clean Claude Code Project structure (adding modular `CLAUDE.md`, `rules/`, `commands/`, `skills/`, `memory/` folders).
+  - Installed and initialized CodeGraph semantic code intelligence index and MCP Server integrations.
   - Executed automated git sync back to GitHub.
+
