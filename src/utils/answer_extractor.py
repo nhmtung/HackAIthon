@@ -18,21 +18,21 @@ __all__ = ["extract_answer"]
 
 # Precompiled regex — matches answer indicators in Vietnamese and English
 _ANSWER_RE = re.compile(
-    r'(?:Đáp\s*án|Answer|Câu\s*trả\s*lời|Chọn)\s*[:：]?\s*([A-J])\b'
+    r'(?:Đáp\s*án|Answer|Câu\s*trả\s*lời|Chọn|Phương\s*án|Lựa\s*chọn)\s*[:：]?\s*\**\s*\[?\s*([A-J])\s*\]?\s*\**\b'
     r'|'
-    r'(?:^|\n)\s*([A-J])\s*[\.\)\]]\s',
+    r'(?:^|\n)\s*[\-\*]?\s*\**\s*\[?\s*([A-J])\s*\]?\s*\**\s*[\.\)\]]\s',
     re.IGNORECASE
 )
 
 # CoT-specific: match the LAST occurrence of "Đáp án: X" in reasoning output
 _COT_FINAL_ANSWER_RE = re.compile(
-    r'(?:Đáp\s*án|Answer|Kết\s*luận|Vậy\s*đáp\s*án)\s*[:：]?\s*\**\s*([A-J])\b',
+    r'(?:Đáp\s*án|Answer|Kết\s*luận|Vậy\s*đáp\s*án|Vậy\s*chọn|Do\s*đó|Phương\s*án\s*đúng\s*là)\s*[:：]?\s*\**\s*\[?\s*([A-J])\s*\]?\b',
     re.IGNORECASE
 )
 
 # Match a standalone letter at the very end of the output
 _TRAILING_LETTER_RE = re.compile(
-    r'[\s\n:：\.\)]*([A-J])\s*[\.\)]*\s*$',
+    r'[\s\n:：\.\)\*]*\[?\s*([A-J])\s*\]?\s*[\.\)\*]*\s*$',
     re.IGNORECASE
 )
 
