@@ -12,6 +12,7 @@ import sys
 import time
 import logging
 import argparse
+import gc
 import pandas as pd
 
 # Force UTF-8 for console output to prevent encoding crashes on Windows
@@ -184,6 +185,10 @@ def main() -> None:
         
         if idx % 10 == 0 or idx == len(questions) - 1:
             logger.info(f"[Predict] Progress: {idx+1}/{len(questions)} | Last sample latency: {elapsed:.4f}s")
+            
+        # Free memory periodically
+        if idx % 50 == 0:
+            gc.collect()
 
     # 5. Save output files (submission.csv and submission_time.csv)
     sub_df = pd.DataFrame(predictions, columns=["qid", "answer"])

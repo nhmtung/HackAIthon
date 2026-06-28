@@ -1,6 +1,6 @@
 # BASE IMAGE
-# Sử dụng đúng phiên bản CUDA 12.2 để khớp với Server BTC
-FROM nvidia/cuda:12.2.0-devel-ubuntu20.04
+# Sử dụng đúng phiên bản CUDA 12.2 để khớp với Server BTC (Ubuntu 22.04 có Python 3.10 native)
+FROM nvidia/cuda:12.2.0-devel-ubuntu22.04
 
 # SYSTEM DEPENDENCIES
 # Cài đặt Python, Pip và các gói hệ thống cần thiết

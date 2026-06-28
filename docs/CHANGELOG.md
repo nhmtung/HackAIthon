@@ -4,7 +4,11 @@ All notable pipeline increments, accuracy measurements, inference speed benchmar
 
 Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) with additional columns for metrics tracking.
 
-## [v1.3.0] — 2026-06-28
+## [v1.3.1] — 2026-06-28
+
+### 🚨 Critical Fixes
+- Upgraded Docker `FROM` image to `nvidia/cuda:12.2.0-devel-ubuntu22.04` to replace the outdated `ubuntu20.04`. This ensures the environment provides Python 3.10 natively, strictly conforming to the pipeline's §1.1 requirement (Python >= 3.10).
+- Added garbage collection (`import gc`) in [predict.py](file:///e:/HackAIthon/predict.py) inference loop to prevent Out-Of-Memory issues on the 2000-question private test set.
 
 ### 🏗️ Added
 - Created [predict.py](file:///e:/HackAIthon/predict.py) as the official end-to-end entrypoint executing sequential time-measured inference.
