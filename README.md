@@ -1,4 +1,4 @@
-# HackAIthon 2026: Track C - INNOVATOR (Multi-Task QA Engine)
+# Vietnamese Student HackAIthon 2026 - Bảng C (Innovator) - Team [Tên_Đội_Của_Bạn]
 
 This repository contains the source code, Docker configs, and optimization engines for the Track C - INNOVATOR project in the Vietnamese Student HackAIthon 2026.
 
