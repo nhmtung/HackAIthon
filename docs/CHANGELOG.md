@@ -4,6 +4,25 @@ All notable pipeline increments, accuracy measurements, inference speed benchmar
 
 Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) with additional columns for metrics tracking.
 
+## [v1.3.0] — 2026-06-28
+
+### 🏗️ Added
+- Created [predict.py](file:///e:/HackAIthon/predict.py) as the official end-to-end entrypoint executing sequential time-measured inference.
+- Created [inference.sh](file:///e:/HackAIthon/inference.sh) wrapper script to orchestrate the pipeline run.
+
+### ✏️ Changed
+- Updated [Dockerfile](file:///e:/HackAIthon/Dockerfile) base image to `nvidia/cuda:12.2.0-devel-ubuntu20.04` and set working directory to `/code` to match the official guidelines.
+- Configured output generation to produce both `submission.csv` (predictions) and `submission_time.csv` (latencies) in the container working directory `/code/`.
+- Enhanced [validate_submission.py](file:///e:/HackAIthon/scripts/validate_submission.py) to automatically check correctness of both output CSV files (including numerical latency constraints).
+- Updated documentation files ([README.md](file:///e:/HackAIthon/README.md), [SUBMISSION_CHECKLIST.md](file:///e:/HackAIthon/SUBMISSION_CHECKLIST.md), and [CLAUDE.md](file:///e:/HackAIthon/CLAUDE.md)) to reflect the new pipeline rules.
+
+### 📊 Metrics
+| Metric | Value | Delta vs. Previous | Notes |
+|---|---|---|---|
+| Image Base | CUDA 12.2.0-devel | Shift from 12.1.0 | Full compatibility with evaluator server |
+| Target Outputs | submission.csv & submission_time.csv | Shift from pred.csv | Dual-file generation with sequential latency tracking |
+| Format Validation | ✅ PASSED | Neutral | Both submission files comply with column and value constraints |
+
 ## [v1.2.0] — 2026-06-28
 
 ### ⚙️ Optimized

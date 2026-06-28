@@ -13,7 +13,7 @@ import pandas as pd
 
 def validate_pred_file(file_path: str) -> bool:
     """
-    Validates a prediction CSV file for submission format compliance.
+    Validates prediction and timing CSV files for submission format compliance.
     """
     print(f"\n============================================================")
     print(f"  VALIDATING SUBMISSION FORMAT: {file_path}")
@@ -85,6 +85,41 @@ def validate_pred_file(file_path: str) -> bool:
     else:
         errors.append("Missing 'answer' column")
 
+    # 7. Validate counterpart submission_time.csv
+    dir_name = os.path.dirname(file_path)
+    base_name = os.path.basename(file_path)
+    if "submission.csv" in base_name:
+        time_file = os.path.join(dir_name, "submission_time.csv")
+        print(f"\n[OK] Found submission_time candidate check: {time_file}")
+        if not os.path.exists(time_file):
+            errors.append("Counterpart submission_time.csv file is missing")
+            print("[FAIL] submission_time.csv: Missing file")
+        else:
+            try:
+                time_df = pd.read_csv(time_file, encoding="utf-8")
+                # Columns: qid,answer,time
+                if list(time_df.columns) != ["qid", "answer", "time"]:
+                    errors.append(f"Column mismatch in submission_time.csv. Expected ['qid', 'answer', 'time'], got {list(time_df.columns)}")
+                    print("[FAIL] submission_time.csv: Invalid columns")
+                else:
+                    print("[OK] submission_time.csv Columns: Correct ('qid', 'answer', 'time')")
+                    
+                # Time column numeric validation
+                if "time" in time_df.columns:
+                    if time_df["time"].isna().any():
+                        errors.append("submission_time.csv contains null values in 'time' column")
+                    elif not pd.to_numeric(time_df["time"], errors='coerce').notna().all():
+                        errors.append("submission_time.csv contains non-numeric values in 'time'")
+                    elif (time_df["time"] < 0).any():
+                        errors.append("submission_time.csv contains negative values in 'time'")
+                    else:
+                        print("[OK] submission_time.csv Latencies: Valid positive numbers")
+                else:
+                    errors.append("Missing 'time' column in submission_time.csv")
+            except Exception as e:
+                errors.append(f"Could not read/validate submission_time.csv: {e}")
+                print("[FAIL] submission_time.csv: Unreadable")
+
     # Print summary report
     print(f"------------------------------------------------------------")
     if errors:
@@ -99,10 +134,10 @@ def validate_pred_file(file_path: str) -> bool:
         return True
 
 def main():
-    parser = argparse.ArgumentParser(description="Validate submission format of pred.csv")
+    parser = argparse.ArgumentParser(description="Validate submission format of prediction files")
     parser.add_argument(
         "--pred", type=str,
-        default="output/pred.csv",
+        default="submission.csv",
         help="Path to prediction CSV"
     )
     args = parser.parse_args()

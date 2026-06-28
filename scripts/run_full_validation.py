@@ -49,7 +49,7 @@ def main():
         help="Use dry-run simulation mode for performance profiling"
     )
     parser.add_argument(
-        "--pred", type=str, default="output/pred.csv",
+        "--pred", type=str, default="submission.csv",
         help="Path to prediction CSV file"
     )
     args = parser.parse_args()

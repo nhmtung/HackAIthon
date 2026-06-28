@@ -27,8 +27,8 @@ _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 _PROJECT_ROOT = os.path.dirname(_SCRIPT_DIR)
 
 INPUT_PATH = os.path.join(_PROJECT_ROOT, "data", "public-test_1780368312.json")
-OUTPUT_PATH = os.path.join(_PROJECT_ROOT, "output", "pred.csv")
-MAIN_SCRIPT = os.path.join(_PROJECT_ROOT, "src", "main.py")
+OUTPUT_PATH = os.path.join(_PROJECT_ROOT, "submission.csv")
+MAIN_SCRIPT = os.path.join(_PROJECT_ROOT, "predict.py")
 
 
 def run_pipeline(dry_run: bool = True) -> int:

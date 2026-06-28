@@ -1,27 +1,31 @@
-# Use NVIDIA CUDA runtime as base (compatible with vLLM)
-FROM nvidia/cuda:12.1.0-runtime-ubuntu22.04
+# BASE IMAGE
+# Sử dụng đúng phiên bản CUDA 12.2 để khớp với Server BTC
+FROM nvidia/cuda:12.2.0-devel-ubuntu20.04
 
-
-# Set working directory
-WORKDIR /app
-
-# Install system dependencies
-RUN apt-get update && apt-get install -y --no-install-recommends \
-    python3.10 \
+# SYSTEM DEPENDENCIES
+# Cài đặt Python, Pip và các gói hệ thống cần thiết
+RUN apt-get update && apt-get install -y \
+    python3 \
     python3-pip \
     git \
-    wget \
     && rm -rf /var/lib/apt/lists/*
 
-# Copy requirements first (for better layer caching)
-COPY requirements.txt .
+# Link python3 thành python nếu cần
+RUN ln -s /usr/bin/python3 /usr/bin/python
 
-# Install Python dependencies
-RUN pip3 install --no-cache-dir -r requirements.txt
+# PROJECT SETUP
+# Thiết lập thư mục làm việc
+WORKDIR /code
 
-# Copy the entire source code
-COPY src/ ./src/
-COPY scripts/ ./scripts/
+# Copy toàn bộ source code vào trong container
+COPY . /code
 
-# Set entrypoint to run main.py
-ENTRYPOINT ["python3", "src/main.py"]
+# INSTALL LIBRARIES
+# Nâng cấp pip và cài đặt các thư viện từ requirements.txt
+RUN pip3 install --no-cache-dir --upgrade pip && \
+    pip3 install --no-cache-dir -r requirements.txt
+
+# EXECUTION
+# Lệnh chạy mặc định khi container khởi động
+# Pipeline sẽ đọc private_test.json và xuất ra submission.csv, submission_time.csv
+CMD ["bash", "inference.sh"]

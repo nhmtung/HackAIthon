@@ -35,9 +35,10 @@ Behavioral guidelines to reduce common LLM coding mistakes, combined with projec
 * **Approved Model Registry**: Qwen/Qwen2.5-3B-Instruct (and AWQ/GPTQ quantized variants) matching the ≤ 5B parameter size ceiling.
 * **Deterministic Inference**: temperature = 0, top_p = 1.0, seed = 42, repetition_penalty = 1.0.
 * **No Network Calls**: Inference pipeline must run offline. No external APIs or search APIs allowed.
-* **Format Compliance**: Output must be written to `/output/pred.csv` with columns `qid,answer` matching the exact case and domain (`answer ∈ {A, B, C, D}`).
+* **Format Compliance**: Output must be written to `submission.csv` (cols: `qid,answer`) and `submission_time.csv` (cols: `qid,answer,time`) matching the exact case and domain (`answer ∈ {A, B, C, D}`).
 
 ## 6. CLI Commands
+* Run prediction pipeline: `python predict.py`
 * Run pipeline test: `python scripts/run_pipeline.py`
 * Run full validation suite: `python scripts/run_full_validation.py --skip-gold --dry-run`
 * Verify environment: `python scripts/verify_env.py`

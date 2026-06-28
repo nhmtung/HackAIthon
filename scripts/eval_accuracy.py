@@ -35,7 +35,7 @@ def main():
     parser = argparse.ArgumentParser(description="Evaluate prediction accuracy against gold labels")
     parser.add_argument(
         "--pred", type=str,
-        default=os.path.join(_PROJECT_ROOT, "output", "pred.csv"),
+        default=os.path.join(_PROJECT_ROOT, "submission.csv"),
         help="Path to prediction CSV"
     )
     parser.add_argument(

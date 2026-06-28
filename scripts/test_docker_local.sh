@@ -1,7 +1,7 @@
 #!/bin/bash
 # test_docker_local.sh
 
-IMAGE_NAME="hackaithon-agent"
+IMAGE_NAME="team_submission"
 TAG="latest"
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 PROJECT_ROOT="$(dirname "$SCRIPT_DIR")"
@@ -18,23 +18,23 @@ if [ $? -ne 0 ]; then
     exit 1
 fi
 
-# Step 2: Run Docker Container in Dry-Run Mode to test pipeline integration
+# Step 2: Run Docker Container in Dry-Run Mode
 echo "Running container in dry-run mode..."
+# Mount PROJECT_ROOT/data to /app/data so prediction copies are written back to host data directory
 docker run --rm \
-    -v "$PROJECT_ROOT/data:/data" \
-    -v "$PROJECT_ROOT/output:/output" \
-    "${IMAGE_NAME}:${TAG}" --dry-run
+    -v "$PROJECT_ROOT/data:/app/data" \
+    "${IMAGE_NAME}:${TAG}" python predict.py --dry-run
 
 if [ $? -ne 0 ]; then
     echo "[FAIL] Docker run failed."
     exit 1
 fi
 
-# Step 3: Validate Output
+# Step 3: Validate Output (placed in host data/ because of mount copying)
 echo "Validating output prediction format..."
-python3 "$SCRIPT_DIR/validate_submission.py" --pred "$PROJECT_ROOT/output/pred.csv"
+python3 "$SCRIPT_DIR/validate_submission.py" --pred "$PROJECT_ROOT/data/submission.csv"
 if [ $? -ne 0 ]; then
-    echo "[FAIL] Validation of output/pred.csv failed."
+    echo "[FAIL] Validation of data/submission.csv failed."
     exit 1
 fi
 
